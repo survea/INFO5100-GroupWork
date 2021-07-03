@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.university;
+package model.department;
 
 import java.util.List;
-import model.department.Department;
+import model.course.Course;
 
 /**
  *
  * @author Hp
  */
-public class University {
-    private String universityName;
-    private List<Department> departmentList;
+public class Department {
+    private String departmentName;
+    private List<Course> courseList;
 }
