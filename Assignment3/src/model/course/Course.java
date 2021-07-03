@@ -19,6 +19,14 @@ public class Course {
     public Course() {
     }
 
+    public Course(String courseCode, String courseName, String courseDescription, int credits) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.courseDescription = courseDescription;
+        this.credits = credits;
+    }
+    
+
     public String getCourseCode() {
         return courseCode;
     }
@@ -57,6 +65,11 @@ public class Course {
 
     public void setCourseRating(int courseRating) {
         this.courseRating = courseRating;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" + "courseCode=" + courseCode + ", courseName=" + courseName + ", courseDescription=" + courseDescription + ", credits=" + credits + '}';
     }
     
 }

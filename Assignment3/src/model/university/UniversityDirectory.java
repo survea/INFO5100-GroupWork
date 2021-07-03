@@ -5,6 +5,7 @@
  */
 package model.university;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,5 +13,23 @@ import java.util.List;
  * @author Hp
  */
 public class UniversityDirectory {
-    List<University> universityList;
+
+    private static List<University> universityList;
+
+    public UniversityDirectory() {
+        universityList = new ArrayList<>();
+    }
+
+    public static List<University> getUniversityList() {
+        return universityList;
+    }
+
+    public static void setUniversityList(List<University> universityList) {
+        UniversityDirectory.universityList = universityList;
+    }
+
+    public static List<University> addUniversity(University university) {
+        universityList.add(university);
+        return universityList;
+    }
 }

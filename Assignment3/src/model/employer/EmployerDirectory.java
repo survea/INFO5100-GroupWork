@@ -5,6 +5,7 @@
  */
 package model.employer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,5 +13,14 @@ import java.util.List;
  * @author Hp
  */
 public class EmployerDirectory {
-    List<Employer> employerList;
+    public static List<Employer> employerList;
+
+    public EmployerDirectory() {
+        employerList = new ArrayList<Employer>();
+    }
+
+    public static List<Employer> addEmployer(Employer employer) {
+        employerList.add(employer);
+        return employerList;
+    }
 }

@@ -5,10 +5,23 @@
  */
 package model.person;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Hp
  */
 public class StudentDirectory {
-    
+
+    public static List<Student> studentDir;
+
+    public StudentDirectory() {
+        studentDir = new ArrayList<>();
+    }
+
+    public static List<Student> addStudent(Student student) {
+        studentDir.add(student);
+        return studentDir;
+    }
 }

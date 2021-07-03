@@ -14,9 +14,14 @@ import model.course.Course;
  */
 public class Employer {
     private String name;
-    private List<Course> employmentCourses;
+    private List<String> employmentCourses;
 
     public Employer() {
+    }
+
+    public Employer(String name, List<String> employmentCourses) {
+        this.name = name;
+        this.employmentCourses = employmentCourses;
     }
 
     public String getName() {
@@ -27,11 +32,17 @@ public class Employer {
         this.name = name;
     }
 
-    public List<Course> getEmploymentCourses() {
+    public List<String> getEmploymentCourses() {
         return employmentCourses;
     }
 
-    public void setEmploymentCourses(List<Course> employmentCourses) {
+    public void setEmploymentCourses(List<String> employmentCourses) {
         this.employmentCourses = employmentCourses;
     }
+
+    @Override
+    public String toString() {
+        return "Employer{" + "name=" + name + ", employmentCourses=" + employmentCourses + '}';
+    }
+    
 }

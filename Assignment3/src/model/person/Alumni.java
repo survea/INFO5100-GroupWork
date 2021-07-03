@@ -6,19 +6,26 @@
 package model.person;
 
 import java.util.List;
+import model.course.Course;
 import model.person.alumniEmployment.EmploymentHistory;
 
 /**
  *
  * @author Hp
  */
-public class Alumni extends Student{
+public class Alumni extends Student {
+
     private String employer;
     private List<EmploymentHistory> employmentHistory;
 
-    public Alumni() {
+    public Alumni(String employer, List<EmploymentHistory> employmentHistory, List<Course> course, double gpa, int id, String firstName, String lastName, int age) {
+        super(course, gpa, id, firstName, lastName, age);
+        this.employer = employer;
+        this.employmentHistory = employmentHistory;
     }
 
+//    public Alumni() {
+//    }
     public String getEmployer() {
         return employer;
     }
@@ -35,5 +42,9 @@ public class Alumni extends Student{
         this.employmentHistory = employmentHistory;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Alumni{" + "id " + super.getId() + ", first name " + super.getFirstName() + ", last name " + super.getLastName() + ", employer=" + employer + ", employmentHistory=" + employmentHistory + '}';
+    }
+
 }
