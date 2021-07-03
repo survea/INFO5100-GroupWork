@@ -7,6 +7,7 @@ package model.person;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.department.Department;
 
 /**
  *
@@ -14,14 +15,22 @@ import java.util.List;
  */
 public class StudentDirectory {
 
-    public static List<Student> studentDir;
+    Department department;
+    public List<Student> studentList;
 
-    public StudentDirectory() {
-        studentDir = new ArrayList<>();
+//    public StudentDirectory() {
+//        studentDir = new ArrayList<>();
+//    }
+
+    public StudentDirectory(Department d) {
+
+        department = d;
+        studentList = new ArrayList();
+
     }
 
-    public static List<Student> addStudent(Student student) {
-        studentDir.add(student);
-        return studentDir;
+    public List<Student> addStudent(Student student) {
+        studentList.add(student);
+        return studentList;
     }
 }

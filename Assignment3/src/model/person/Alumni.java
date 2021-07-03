@@ -7,6 +7,7 @@ package model.person;
 
 import java.util.List;
 import model.course.Course;
+import model.course.CourseCatalog;
 import model.person.alumniEmployment.EmploymentHistory;
 
 /**
@@ -15,11 +16,13 @@ import model.person.alumniEmployment.EmploymentHistory;
  */
 public class Alumni extends Student {
 
+    private CourseCatalog courseCatalog;
     private String employer;
     private List<EmploymentHistory> employmentHistory;
 
-    public Alumni(String employer, List<EmploymentHistory> employmentHistory, List<Course> course, double gpa, int id, String firstName, String lastName, int age) {
-        super(course, gpa, id, firstName, lastName, age);
+    public Alumni(String employer, List<EmploymentHistory> employmentHistory, CourseCatalog course, double gpa, int id, String firstName, String lastName, int age) {
+        super(gpa, id, firstName, lastName, age);
+        this.courseCatalog = course;
         this.employer = employer;
         this.employmentHistory = employmentHistory;
     }
@@ -40,6 +43,11 @@ public class Alumni extends Student {
 
     public void setEmploymentHistory(List<EmploymentHistory> employmentHistory) {
         this.employmentHistory = employmentHistory;
+    }
+
+    public CourseCatalog addCourse(Course course) {
+        courseCatalog.addCourse(course);
+        return courseCatalog;
     }
 
     @Override

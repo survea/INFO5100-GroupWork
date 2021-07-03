@@ -13,28 +13,28 @@ import java.util.List;
  * @author Hp
  */
 public class CourseCatalog {
-    private static List<Course> courseList;
+    private List<Course> courseList;
 
     public CourseCatalog() {
         courseList = new ArrayList<>();
     }
 
-    public static List<Course> getCourseList() {
+    public List<Course> getCourseList() {
         return courseList;
     }
 
-    public static void setCourseList(List<Course> courseList) {
-        CourseCatalog.courseList = courseList;
+    public void setCourseList(List<Course> courseList) {
+        courseList = courseList;
     }
     
-    public static List<Course> addList(Course course) {
+    public List<Course> addCourse(Course course) {
         courseList.add(course);
         return courseList;
     };
 
     @Override
     public String toString() {
-        return "CourseCatalog{" + '}';
+        return "CourseCatalog{" + courseList +"}";
     }
     
 }
