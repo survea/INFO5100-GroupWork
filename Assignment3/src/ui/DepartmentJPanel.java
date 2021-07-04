@@ -6,6 +6,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.util.Formatter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -75,7 +76,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         lblRole4 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txtDeptCourseRating = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -384,9 +385,9 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(103, 130, 167));
         jLabel1.setText("Course Ranking(Market Trend):");
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(211, 64, 71));
-        jLabel2.setText("98.0%");
+        txtDeptCourseRating.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        txtDeptCourseRating.setForeground(new java.awt.Color(211, 64, 71));
+        txtDeptCourseRating.setText("98.0%");
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(103, 130, 167));
@@ -436,7 +437,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4)
-                                            .addComponent(jLabel2))))
+                                            .addComponent(txtDeptCourseRating))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -464,7 +465,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(txtDeptCourseRating))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -483,6 +484,9 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private void cmbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartmentActionPerformed
         // TODO add your handling code here:
         populateCourseTable();
+        Formatter dobleFormatter = new Formatter();
+        dobleFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptCoursesRating());
+        txtDeptCourseRating.setText(String.valueOf(dobleFormatter) + "%");
     }//GEN-LAST:event_cmbDepartmentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -531,12 +535,12 @@ public class DepartmentJPanel extends javax.swing.JPanel {
             populateAlumniTable();
         } else if (index == 2) {
             populateEmployerTable();
-        } else if(index == 3) {
+        } else if (index == 3) {
             populateFacultyTable();
-        } else if(index == 4) {
+        } else if (index == 4) {
             populateStudentsTable();
         }
-       
+
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
@@ -552,7 +556,6 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnView;
     private javax.swing.JComboBox<Object> cmbDepartment;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -573,6 +576,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTable tblFaculty;
     private javax.swing.JTable tblStudent;
+    private javax.swing.JLabel txtDeptCourseRating;
     // End of variables declaration//GEN-END:variables
 
     private void populateCourseTable() {
@@ -586,12 +590,14 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                     sb.append(courceContent);
                     sb.append(", ");
                 }
+                Formatter formatRatingPercent = new Formatter();
+                formatRatingPercent.format("%.2f", course.getRatingPercent());
                 String courseContentString = sb.toString();
                 Object row[] = new Object[4];
                 row[0] = course.getCourseCode();
                 row[1] = course.getCourseName();
                 row[2] = courseContentString;
-                row[3] = String.valueOf(course.getRatingPercent());
+                row[3] = String.valueOf(formatRatingPercent);
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -607,7 +613,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     }
 
     private void populateAlumniTable() {
-                try {
+        try {
             DefaultTableModel model = (DefaultTableModel) tblAlumni.getModel();
             model.setRowCount(0);
             for (Alumni alumni : ((Department) cmbDepartment.getSelectedItem()).getAlumniDirectory().getAlumniDir()) {
@@ -618,12 +624,12 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                     sb.append(", ");
                 }
                 String courseNameString = sb.toString();
-                Object row[] = new Object[4];
+                Object row[] = new Object[5];
                 row[0] = String.valueOf(alumni.getFirstName() + " " + alumni.getLastName());
                 row[1] = courseNameString;
                 row[2] = String.valueOf(alumni.getGpa());
                 row[3] = alumni.getEmployer();
-//                row[4] = String.valueOf(alumni.getSalary());
+                row[4] = String.valueOf(alumni.getSalary());
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -632,7 +638,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     }
 
     private void populateEmployerTable() {
-                try {
+        try {
             DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
             model.setRowCount(0);
             for (Employer employer : ((Department) cmbDepartment.getSelectedItem()).getEmployerList()) {
@@ -660,7 +666,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     }
 
     private void populateStudentsTable() {
-                        try {
+        try {
             DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
             model.setRowCount(0);
             for (Student student : ((Department) cmbDepartment.getSelectedItem()).getStudentdirectory().studentList) {

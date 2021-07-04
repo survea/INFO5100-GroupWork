@@ -6,6 +6,7 @@
 package model.department;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 import model.course.Course;
 import model.course.CourseCatalog;
@@ -110,6 +111,15 @@ public class Department {
                 if (alumni.getCourseCatalog().getCourseList().contains(course)) {
 //                    courseAlumniCount++;
                     course.setCourseRating(course.getCourseRating() + 1);
+                    if(alumni.getSalary()> 0 && alumni.getSalary()<= 50000 ) {
+                        course.setCourseRating(course.getCourseRating() + 0.3);
+                    }else if(alumni.getSalary()> 50000 && alumni.getSalary()< 100000 ) {
+                        course.setCourseRating(course.getCourseRating() + 0.6);
+                    }else if(alumni.getSalary()> 100000 ) {
+                        course.setCourseRating(course.getCourseRating() + 1);
+                    } else {
+                        course.setCourseRating(course.getCourseRating() + 0);
+                    }
 //                    break;
                 }
             }
@@ -121,8 +131,17 @@ public class Department {
                     }
                 }
             }
-            course.setRatingPercent((course.getCourseRating()  * 100)/ (employerList.size() + alumniDirectory.getAlumniDir().size()));
+            double calcCourseRating = (course.getCourseRating()  * 100)/ (employerList.size() + (alumniDirectory.getAlumniDir().size())*2);
+            course.setRatingPercent(calcCourseRating);
         }
+    }
+    
+    public double calculateDeptCoursesRating() {
+        double courseRankingSum = 0;
+        for (Course course : courseList.getCourseList()) {
+            courseRankingSum = courseRankingSum + course.getRatingPercent();
+        }
+        return (courseRankingSum/ courseList.getCourseList().size());
     }
 
     @Override

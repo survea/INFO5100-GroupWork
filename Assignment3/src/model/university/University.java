@@ -43,6 +43,14 @@ public class University {
         return departmentList;
     }
 
+    public double calculateUniCoursesRating() {
+        double uniCourseRankingSum = 0;
+        for (Department dept : departmentList) {
+            uniCourseRankingSum = uniCourseRankingSum + dept.calculateDeptCoursesRating();
+        }
+        return (uniCourseRankingSum / departmentList.size());
+    }
+
     @Override
     public String toString() {
         return universityName; //To change body of generated methods, choose Tools | Templates.

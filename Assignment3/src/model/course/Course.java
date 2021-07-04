@@ -18,7 +18,7 @@ public class Course {
     private String courseName;
     private String courseDescription;
     private int credits;
-    private int courseRating;
+    private double courseRating;
     private List<String> courseContentList;
     private double ratingPercent;
 
@@ -65,11 +65,11 @@ public class Course {
         this.credits = credits;
     }
 
-    public int getCourseRating() {
+    public double getCourseRating() {
         return courseRating;
     }
 
-    public void setCourseRating(int courseRating) {
+    public void setCourseRating(double courseRating) {
         this.courseRating = courseRating;
     }
 

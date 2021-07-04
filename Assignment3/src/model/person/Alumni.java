@@ -21,11 +21,12 @@ public class Alumni extends Student {
     private List<EmploymentHistory> employmentHistory;
     private double Salary;
 
-    public Alumni(String employer, List<EmploymentHistory> employmentHistory, CourseCatalog course, double gpa, int id, String firstName, String lastName, int age) {
+    public Alumni(String employer, List<EmploymentHistory> employmentHistory, CourseCatalog course, double gpa, int id, String firstName, String lastName, int age, double salary) {
         super(gpa, id, firstName, lastName, age);
         this.courseCatalog = course;
         this.employer = employer;
         this.employmentHistory = employmentHistory;
+        this.Salary = salary;
     }
 
 //    public Alumni() {

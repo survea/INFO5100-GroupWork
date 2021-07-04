@@ -53,9 +53,9 @@ public class MainJFrame extends javax.swing.JFrame {
             "2,27,Don,Johnson,3.80"
         };
         String[] alumniStudents = {
-            "4,47,Dan1,Peters,3.75",
-            "5,37,Allan1,Simpson,3.85",
-            "6,27,Don1,Johnson,3.80"
+            "4,47,Dan1,Peters,3.75,6000",
+            "5,37,Allan1,Simpson,3.85,4900",
+            "6,27,Don1,Johnson,3.80,11000"
         };
         String[] newCourseList = {
             "INFO5100,AED,info sys course,4,0",
@@ -229,9 +229,8 @@ public class MainJFrame extends javax.swing.JFrame {
             String[] tokens = student.split(COMMA_DELIMITER);
             CourseCatalog alumniCourseCatalog = new CourseCatalog();
             alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(0));
-
-            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(1));
-            Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
+            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
+            Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]),Double.parseDouble(tokens[5]));
             dept.addAlumni(alumniDetails);
 //            AlumniDirectory.addAlumni(alumniDetails);
             PersonDirectory.addPerson(alumniDetails);
@@ -242,16 +241,6 @@ public class MainJFrame extends javax.swing.JFrame {
         Department infosysDept = UniversityDirectory.getUniversityList().get(0).getDepartmentList().get(0);
 
         UniversityDirectory.getUniversityList().get(0).getDepartmentList().forEach(dept -> {
-//            dept.getCourseList().getCourseList().forEach(course -> {
-//                for (Employer employer : infosysDept.getEmployerList()) {
-//                    for (String inDemandCourseContent : employer.getEmploymentCourses()) {
-//                        if (course.getCourseContentList().contains(inDemandCourseContent)) {
-//                            course.setCourseRating(course.getCourseRating() + 1);
-//                            break;
-//                        }
-//                    }
-//                }
-//            });
             dept.calculateCourseRatingPercent();
             dept.getCourseList().getCourseList().forEach(System.out::println);
         });
