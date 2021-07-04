@@ -7,6 +7,7 @@ package model.person;
 
 import java.util.List;
 import model.course.Course;
+import model.course.CourseCatalog;
 
 /**
  *
@@ -14,18 +15,39 @@ import model.course.Course;
  */
 public class Student extends Person {
 
-    private List<Course> course;
+    private CourseCatalog courseCatalog;
     private double gpa;
 
-    public Student(List<Course> course, double gpa, int id, String firstName, String lastName, int age) {
+    public Student(double gpa, int id, String firstName, String lastName, int age) {
         super(id, firstName, lastName, age);
-        this.course = course;
+        courseCatalog = new CourseCatalog();
+
         this.gpa = gpa;
+    }
+
+    public CourseCatalog getCourseCatalog() {
+        return courseCatalog;
+    }
+
+    public void setCourseCatalog(CourseCatalog courseCatalog) {
+        this.courseCatalog = courseCatalog;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
+    public void addStudentCourse(Course course) {
+        courseCatalog.addCourse(course);
     }
 
     @Override
     public String toString() {
-        return "Student{" + "id " + super.getId() + ", first name " + super.getFirstName() + ", last name " + super.getLastName() + ", course=" + course + ", gpa=" + gpa + '}';
+        return "Student{" + "id " + super.getId() + ", first name " + super.getFirstName() + ", last name " + super.getLastName() + ", course=" + courseCatalog + ", gpa=" + gpa + '}';
     }
 
 }

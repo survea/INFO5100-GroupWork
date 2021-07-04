@@ -48,7 +48,6 @@ public class AlumniJPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
         btnAddAlumni = new javax.swing.JButton();
-        btnUpdateAlumni = new javax.swing.JButton();
         addjPanel5 = new javax.swing.JPanel();
         lblCourseCode1 = new javax.swing.JLabel();
         txtCourseCode1 = new javax.swing.JTextField();
@@ -197,17 +196,6 @@ public class AlumniJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnUpdateAlumni.setBackground(new java.awt.Color(254, 254, 254));
-        btnUpdateAlumni.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        btnUpdateAlumni.setForeground(new java.awt.Color(100, 149, 162));
-        btnUpdateAlumni.setText("Update");
-        btnUpdateAlumni.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnUpdateAlumni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateAlumniActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout addjPanel4Layout = new javax.swing.GroupLayout(addjPanel4);
         addjPanel4.setLayout(addjPanel4Layout);
         addjPanel4Layout.setHorizontalGroup(
@@ -218,10 +206,8 @@ public class AlumniJPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(addjPanel4Layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btnAddAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdateAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(319, 319, 319)
+                        .addComponent(btnAddAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addjPanel4Layout.setVerticalGroup(
@@ -230,9 +216,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(addjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnAddAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 15, Short.MAX_VALUE))
         );
 
@@ -361,19 +345,11 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void btnAddAlumniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAlumniActionPerformed
         // TODO add your handling code here:
-        AlumniJPanel aluminiJPanel = new AlumniJPanel(mainWorkArea);
+        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea);
         mainWorkArea.add("AluminiJPanel", aluminiJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
     }//GEN-LAST:event_btnAddAlumniActionPerformed
-
-    private void btnUpdateAlumniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAlumniActionPerformed
-        // TODO add your handling code here:
-        AlumniJPanel aluminiJPanel = new AlumniJPanel(mainWorkArea);
-        mainWorkArea.add("AluminiJPanel", aluminiJPanel);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
-    }//GEN-LAST:event_btnUpdateAlumniActionPerformed
 
     private void txtCourseCode1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCourseCode1ActionPerformed
         // TODO add your handling code here:
@@ -392,7 +368,6 @@ public class AlumniJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddAlumni;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton btnUpdateAlumni;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblCourseCode;
     private javax.swing.JLabel lblCourseCode1;

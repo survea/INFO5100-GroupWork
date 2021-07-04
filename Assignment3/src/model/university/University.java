@@ -5,6 +5,7 @@
  */
 package model.university;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.department.Department;
 
@@ -18,6 +19,7 @@ public class University {
     private List<Department> departmentList;
 
     public University() {
+        departmentList = new ArrayList<>();
     }
 
     public String getUniversityName() {
@@ -35,7 +37,10 @@ public class University {
     public void setDepartmentList(List<Department> departmentList) {
         this.departmentList = departmentList;
     }
-
+    public List<Department> addDepartment(Department department) {
+        departmentList.add(department);
+        return departmentList;
+    }
     @Override
     public String toString() {
         return "University{" + "universityName=" + universityName + ", departmentList=" + departmentList + '}';
