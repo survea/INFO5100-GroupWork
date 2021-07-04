@@ -38,6 +38,7 @@ public class MainJFrame extends javax.swing.JFrame {
     PersonDirectory personDir;
     AlumniDirectory alumniDirectory;
     UniversityDirectory univDir;
+    final String COMMA_DELIMITER = ",";
 
     public MainJFrame() {
         initComponents();
@@ -46,7 +47,7 @@ public class MainJFrame extends javax.swing.JFrame {
         personDir = new PersonDirectory();
         alumniDirectory = new AlumniDirectory();
         univDir = new UniversityDirectory();
-        final String COMMA_DELIMITER = ",";
+
         String[] newStudents = {
             "1,47,Dan,Peters,3.75",
             "3,37,Allan,Simpson,3.85",
@@ -58,9 +59,9 @@ public class MainJFrame extends javax.swing.JFrame {
             "6,27,Don1,Johnson,3.80"
         };
         String[] newCourseList = {
-            "INFO5100,AED,info sys course,4,3.75",
-            "INFO5001,User interface,info sys course,4,3.85",
-            "CSYE6200,OOPs,computer science course,4,3.80"
+            "INFO5100,AED,info sys course,4,0",
+            "INFO5001,User interface,info sys course,4,0",
+            "CSYE6200,OOPs,computer science course,4,0"
         };
         String[] employeeList = {
             "Amazon",
@@ -69,80 +70,33 @@ public class MainJFrame extends javax.swing.JFrame {
             "Walmart"
         };
         String[] emp1Courses = {
-            "INFO5100",
-            "csye6200"
+            "Java",
+            "Angular",
+            "HTML"
         };
         University northeastern = new University();
         List<String> csvCourseList = new ArrayList<>(Arrays.asList(newCourseList));
         northeastern.setUniversityName("Northeastern University");
 
         Department infoSys = new Department();
+        studDir = new StudentDirectory(infoSys);
         infoSys.setDepartmentName("Information system");
 
-        String[] tokens = csvCourseList.get(0).split(COMMA_DELIMITER);
-        infoSys.addCourse(new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3])));
+        addDepartmentCourses(infoSys, csvCourseList);
+        addDepartmentStudents(infoSys, studDir, newStudents);
+        addDepartmentEmployers(infoSys, employeeList, emp1Courses);
+        addDepartmentAlumni(infoSys, alumniStudents);
 
-        tokens = csvCourseList.get(1).split(COMMA_DELIMITER);
-        infoSys.addCourse(new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3])));
-
-        tokens = csvCourseList.get(2).split(COMMA_DELIMITER);
-        infoSys.addCourse(new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3])));
-
-        studDir = new StudentDirectory(infoSys);
-
-//        for (String course : newCourseList) {
-//            tokens = course.split(COMMA_DELIMITER);
-//            Course courseDetails = new Course(tokens[0], tokens[1],
-//                    tokens[2], Integer.parseInt(tokens[3]));
-//            infoSys.addCourse(courseDetails);
-//        }
-        List<String> csvStudentList = new ArrayList<>(Arrays.asList(newStudents));
-        for (String student : csvStudentList) {
-            tokens = student.split(COMMA_DELIMITER);
-            Student studentDetails = new Student(Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
-
-            String[] studCourseTokens = csvCourseList.get(0).split(COMMA_DELIMITER);
-            CourseCatalog studentCourseCatalog = new CourseCatalog();
-            studentDetails.addStudentCourse(new Course(studCourseTokens[0], studCourseTokens[1], studCourseTokens[2], Integer.parseInt(studCourseTokens[3])));
-
-            studCourseTokens = csvCourseList.get(1).split(COMMA_DELIMITER);
-            studentDetails.addStudentCourse(new Course(studCourseTokens[0], studCourseTokens[1], studCourseTokens[2], Integer.parseInt(studCourseTokens[3])));
-            studDir.addStudent(studentDetails);
-            PersonDirectory.addPerson(studentDetails);
-        }
-
-        List<String> csvAlumniList = new ArrayList<>(Arrays.asList(alumniStudents));
-        for (String student : csvAlumniList) {
-            tokens = student.split(COMMA_DELIMITER);
-            CourseCatalog alumniCourseCatalog = new CourseCatalog();
-            String[] courseToken = csvCourseList.get(0).split(COMMA_DELIMITER);
-            alumniCourseCatalog.addCourse(new Course(courseToken[0], courseToken[1], courseToken[2], Integer.parseInt(courseToken[3])));
-
-            courseToken = csvCourseList.get(1).split(COMMA_DELIMITER);
-            alumniCourseCatalog.addCourse(new Course(courseToken[0], courseToken[1], courseToken[2], Integer.parseInt(courseToken[3])));
-            Alumni alumniDetails = new Alumni("Employee1",null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
-            AlumniDirectory.addAlumni(alumniDetails);
-            PersonDirectory.addPerson(alumniDetails);
-        }
-
-        List<String> csvEmployeeList = new ArrayList<>(Arrays.asList(employeeList));
-        List<String> csvEmp1Courses = new ArrayList<>(Arrays.asList(emp1Courses));
-
-        Employer employ1 = new Employer(csvEmployeeList.get(0), csvEmp1Courses);
-        Employer employ2 = new Employer(csvEmployeeList.get(1), csvEmp1Courses);
-        Employer employ3 = new Employer(csvEmployeeList.get(2), csvEmp1Courses);
-        EmployerDirectory.addEmployer(employ1);
-        EmployerDirectory.addEmployer(employ2);
-        EmployerDirectory.addEmployer(employ3);
-//        northeastern.setDepartmentList(departmentList);
-northeastern.addDepartment(infoSys);
+        northeastern.addDepartment(infoSys);
         UniversityDirectory.addUniversity(northeastern);
         UniversityDirectory.getUniversityList().forEach(System.out::println);
 
+        calculateRating();
+
         PersonDirectory.getPersonDir().forEach(System.out::println);
-//        AlumniDirectory.alumniDir.forEach(System.out::println);
         courseCatalog.getCourseList().forEach(System.out::println);
         EmployerDirectory.employerList.forEach(System.out::println);
+        
     }
 
     /**
@@ -202,6 +156,90 @@ northeastern.addDepartment(infoSys);
             public void run() {
                 new MainJFrame().setVisible(true);
             }
+        });
+    }
+
+    private void addDepartmentCourses(Department infoSys, List<String> csvCourseList) {
+        String[] tokens = csvCourseList.get(0).split(COMMA_DELIMITER);
+        Course info5100 = new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]));
+        info5100.addCourseContent("Java");
+        info5100.addCourseContent("HTML");
+        info5100.addCourseContent("Javascript");
+        infoSys.addCourse(info5100);
+
+        tokens = csvCourseList.get(1).split(COMMA_DELIMITER);
+        Course INFO5001 = new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]));
+        INFO5001.addCourseContent("Angular");
+        INFO5001.addCourseContent("React");
+        INFO5001.addCourseContent("NodeJS");
+        infoSys.addCourse(INFO5001);
+
+        tokens = csvCourseList.get(2).split(COMMA_DELIMITER);
+        Course CSYE6200 = new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]));
+        CSYE6200.addCourseContent("sql");
+        CSYE6200.addCourseContent("mongoDB");
+        infoSys.addCourse(CSYE6200);
+    }
+
+    private void addDepartmentStudents(Department dept, StudentDirectory studDir, String[] newStudents) {
+        List<String> csvStudentList = new ArrayList<>(Arrays.asList(newStudents));
+        for (String student : csvStudentList) {
+            String[] tokens = student.split(COMMA_DELIMITER);
+            Student studentDetails = new Student(Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
+
+            studentDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
+            studentDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
+            studDir.addStudent(studentDetails);
+            PersonDirectory.addPerson(studentDetails);
+        }
+    }
+
+    private void addDepartmentEmployers(Department dept, String[] employeeList, String[] emp1Courses) {
+        List<String> csvEmployeeList = new ArrayList<>(Arrays.asList(employeeList));
+        List<String> csvEmp1Courses = new ArrayList<>(Arrays.asList(emp1Courses));
+
+        Employer employ1 = new Employer(csvEmployeeList.get(0), csvEmp1Courses);
+        Employer employ2 = new Employer(csvEmployeeList.get(1), csvEmp1Courses);
+        Employer employ3 = new Employer(csvEmployeeList.get(2), csvEmp1Courses);
+        dept.addEmployer(employ1);
+        dept.addEmployer(employ2);
+        dept.addEmployer(employ3);
+        EmployerDirectory.addEmployer(employ1);
+        EmployerDirectory.addEmployer(employ2);
+        EmployerDirectory.addEmployer(employ3);
+    }
+
+    private void addDepartmentAlumni(Department dept, String[] alumniStudents) {
+        List<String> csvAlumniList = new ArrayList<>(Arrays.asList(alumniStudents));
+        for (String student : csvAlumniList) {
+            String[] tokens = student.split(COMMA_DELIMITER);
+            CourseCatalog alumniCourseCatalog = new CourseCatalog();
+            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
+
+            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
+            Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
+            dept.addAlumni(alumniDetails);
+//            AlumniDirectory.addAlumni(alumniDetails);
+            PersonDirectory.addPerson(alumniDetails);
+        }
+    }
+
+    private void calculateRating() {
+        Department infosysDept = UniversityDirectory.getUniversityList().get(0).getDepartmentList().get(0);
+
+        UniversityDirectory.getUniversityList().get(0).getDepartmentList().forEach(dept -> {
+//            dept.getCourseList().getCourseList().forEach(course -> {
+//                for (Employer employer : infosysDept.getEmployerList()) {
+//                    for (String inDemandCourseContent : employer.getEmploymentCourses()) {
+//                        if (course.getCourseContentList().contains(inDemandCourseContent)) {
+//                            course.setCourseRating(course.getCourseRating() + 1);
+//                            break;
+//                        }
+//                    }
+//                }
+//            });
+            dept.calculateCourseRatingPercent();
+            dept.getCourseList().getCourseList().forEach(System.out::println);
         });
     }
 
