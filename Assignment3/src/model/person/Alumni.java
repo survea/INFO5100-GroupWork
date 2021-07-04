@@ -50,6 +50,14 @@ public class Alumni extends Student {
         return courseCatalog;
     }
 
+    public CourseCatalog getCourseCatalog() {
+        return courseCatalog;
+    }
+
+    public void setCourseCatalog(CourseCatalog courseCatalog) {
+        this.courseCatalog = courseCatalog;
+    }
+
     @Override
     public String toString() {
         return "Alumni{" + "id " + super.getId() + ", first name " + super.getFirstName() + ", last name " + super.getLastName() + ", employer=" + employer + ", employmentHistory=" + employmentHistory + '}';

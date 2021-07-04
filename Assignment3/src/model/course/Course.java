@@ -5,16 +5,22 @@
  */
 package model.course;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Hp
  */
 public class Course {
+
     private String courseCode;
     private String courseName;
     private String courseDescription;
     private int credits;
-    private static int courseRating;
+    private int courseRating;
+    private List<String> courseContentList;
+    private double ratingPercent;
 
     public Course() {
     }
@@ -24,8 +30,8 @@ public class Course {
         this.courseName = courseName;
         this.courseDescription = courseDescription;
         this.credits = credits;
+        courseContentList = new ArrayList<>();
     }
-    
 
     public String getCourseCode() {
         return courseCode;
@@ -67,9 +73,35 @@ public class Course {
         this.courseRating = courseRating;
     }
 
+    public List<String> getCourseContentList() {
+        return courseContentList;
+    }
+
+    public void setCourseContentList(List<String> courseContentList) {
+        this.courseContentList = courseContentList;
+    }
+
+    public double getRatingPercent() {
+        return ratingPercent;
+    }
+
+    public void setRatingPercent(double ratingPercent) {
+        this.ratingPercent = ratingPercent;
+    }
+
+    public List<String> addCourseContent(String courseContent) {
+        courseContentList.add(courseContent);
+        return courseContentList;
+    }
+
+//    public double calculateRatingPercent(int employerCount) {
+//        setRatingPercent((getCourseRating() / employerCount) * 100);
+//        return ratingPercent;
+//    }
+
     @Override
     public String toString() {
-        return "Course{" + "courseCode=" + courseCode + ", courseName=" + courseName + ", courseDescription=" + courseDescription + ", credits=" + credits + '}';
+        return "Course{" + "courseCode=" + courseCode + ", courseName=" + courseName + ", courseDescription=" + courseDescription + ", credits=" + credits + ", ratingPercent=" + ratingPercent + '}';
     }
-    
+
 }

@@ -1,5 +1,7 @@
+
 package ui;
 
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +12,6 @@ import model.employer.Employer;
 import model.employer.EmployerDirectory;
 import model.person.Alumni;
 import model.person.AlumniDirectory;
-import model.person.Person;
 import model.person.PersonDirectory;
 import model.person.Student;
 import model.person.StudentDirectory;
@@ -18,19 +19,14 @@ import model.person.alumniEmployment.EmploymentHistory;
 import model.university.University;
 import model.university.UniversityDirectory;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author Hp
+ * @author archil
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainJFrame
+       /**
+     * Creates new form Main
      */
     EmployerDirectory empDir;
     CourseCatalog courseCatalog;
@@ -42,6 +38,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
+        setSize(800,700);
+        setResizable(false);
+       
+        
+        setLoginScreen();
         empDir = new EmployerDirectory();
         courseCatalog = new CourseCatalog();
         personDir = new PersonDirectory();
@@ -108,17 +109,21 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainWorkArea = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        mainWorkArea.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(mainWorkArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(mainWorkArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -150,6 +155,7 @@ public class MainJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -157,6 +163,15 @@ public class MainJFrame extends javax.swing.JFrame {
                 new MainJFrame().setVisible(true);
             }
         });
+    }
+
+    private void setLoginScreen() {
+
+       LoginScreen loginScreen = new LoginScreen(mainWorkArea);
+       mainWorkArea.add("LoginScreen", loginScreen);
+       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+       layout.next(mainWorkArea);
+
     }
 
     private void addDepartmentCourses(Department infoSys, List<String> csvCourseList) {
@@ -214,9 +229,9 @@ public class MainJFrame extends javax.swing.JFrame {
         for (String student : csvAlumniList) {
             String[] tokens = student.split(COMMA_DELIMITER);
             CourseCatalog alumniCourseCatalog = new CourseCatalog();
-            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
+            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(1));
 
-            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
+            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(1));
             Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
             dept.addAlumni(alumniDetails);
 //            AlumniDirectory.addAlumni(alumniDetails);
@@ -244,5 +259,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel mainWorkArea;
     // End of variables declaration//GEN-END:variables
+
+  
 }

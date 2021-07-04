@@ -14,13 +14,21 @@ import java.util.List;
  */
 public class AlumniDirectory {
 
-    public static List<Alumni> alumniDir;
+    public List<Alumni> alumniDir;
+
+    public List<Alumni> getAlumniDir() {
+        return alumniDir;
+    }
+
+    public void setAlumniDir(List<Alumni> alumniDir) {
+        this.alumniDir = alumniDir;
+    }
 
     public AlumniDirectory() {
         alumniDir = new ArrayList<>();
     }
 
-    public static List<Alumni> addAlumni(Alumni alumni) {
+    public List<Alumni> addAlumni(Alumni alumni) {
         alumniDir.add(alumni);
         return alumniDir;
     }
