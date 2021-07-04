@@ -19,6 +19,7 @@ public class Alumni extends Student {
     private CourseCatalog courseCatalog;
     private String employer;
     private List<EmploymentHistory> employmentHistory;
+    private double Salary;
 
     public Alumni(String employer, List<EmploymentHistory> employmentHistory, CourseCatalog course, double gpa, int id, String firstName, String lastName, int age) {
         super(gpa, id, firstName, lastName, age);
@@ -56,6 +57,14 @@ public class Alumni extends Student {
 
     public void setCourseCatalog(CourseCatalog courseCatalog) {
         this.courseCatalog = courseCatalog;
+    }
+
+    public double getSalary() {
+        return Salary;
+    }
+
+    public void setSalary(double Salary) {
+        this.Salary = Salary;
     }
 
     @Override

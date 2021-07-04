@@ -13,6 +13,7 @@ import model.employer.Employer;
 import model.person.Alumni;
 import model.person.AlumniDirectory;
 import model.person.FacultyDirectory;
+import model.person.Student;
 import model.person.StudentDirectory;
 
 /**
@@ -32,6 +33,7 @@ public class Department {
         courseList = new CourseCatalog();
         employerList = new ArrayList<>();
         alumniDirectory = new AlumniDirectory();
+        studentdirectory = new StudentDirectory(this);
     }
 
     public String getDepartmentName() {
@@ -96,6 +98,10 @@ public class Department {
         alumniDirectory.addAlumni(alumni);
         return alumniDirectory;
     }
+        public StudentDirectory addStudent(Student student) {
+        studentdirectory.addStudent(student);
+        return studentdirectory;
+    }
 
     public void calculateCourseRatingPercent() {
         int courseAlumniCount = 0;
@@ -118,4 +124,10 @@ public class Department {
             course.setRatingPercent((course.getCourseRating()  * 100)/ (employerList.size() + alumniDirectory.getAlumniDir().size()));
         }
     }
+
+    @Override
+    public String toString() {
+        return departmentName;
+    }
+    
 }

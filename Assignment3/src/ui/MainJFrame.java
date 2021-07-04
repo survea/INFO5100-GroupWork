@@ -41,8 +41,6 @@ public class MainJFrame extends javax.swing.JFrame {
         setSize(800,700);
         setResizable(false);
        
-        
-        setLoginScreen();
         empDir = new EmployerDirectory();
         courseCatalog = new CourseCatalog();
         personDir = new PersonDirectory();
@@ -97,6 +95,7 @@ public class MainJFrame extends javax.swing.JFrame {
         PersonDirectory.getPersonDir().forEach(System.out::println);
         courseCatalog.getCourseList().forEach(System.out::println);
         EmployerDirectory.employerList.forEach(System.out::println);
+        setLoginScreen();
         
     }
 
@@ -167,7 +166,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void setLoginScreen() {
 
-       LoginScreen loginScreen = new LoginScreen(mainWorkArea);
+       LoginScreen loginScreen = new LoginScreen(mainWorkArea, univDir);
        mainWorkArea.add("LoginScreen", loginScreen);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
@@ -204,7 +203,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
             studentDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
             studentDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
-            studDir.addStudent(studentDetails);
+            dept.addStudent(studentDetails);
             PersonDirectory.addPerson(studentDetails);
         }
     }
@@ -229,7 +228,7 @@ public class MainJFrame extends javax.swing.JFrame {
         for (String student : csvAlumniList) {
             String[] tokens = student.split(COMMA_DELIMITER);
             CourseCatalog alumniCourseCatalog = new CourseCatalog();
-            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(1));
+            alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(0));
 
             alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(1));
             Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));

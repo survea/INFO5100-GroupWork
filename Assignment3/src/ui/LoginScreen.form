@@ -86,7 +86,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="cmbRoles" min="-2" pref="318" max="-2" attributes="0"/>
+                          <Component id="cmbUniversity" min="-2" pref="318" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
@@ -103,7 +103,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblRole2" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="cmbRoles" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbUniversity" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnLogin" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace pref="53" max="32767" attributes="0"/>
@@ -127,7 +127,7 @@
             <Property name="text" type="java.lang.String" value="University Login"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbRoles">
+        <Component class="javax.swing.JComboBox" name="cmbUniversity">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="15" style="1"/>
@@ -142,7 +142,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbRolesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbUniversityActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>

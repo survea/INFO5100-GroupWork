@@ -37,13 +37,15 @@ public class University {
     public void setDepartmentList(List<Department> departmentList) {
         this.departmentList = departmentList;
     }
+
     public List<Department> addDepartment(Department department) {
         departmentList.add(department);
         return departmentList;
     }
+
     @Override
     public String toString() {
-        return "University{" + "universityName=" + universityName + ", departmentList=" + departmentList + '}';
+        return universityName; //To change body of generated methods, choose Tools | Templates.
     }
 
 }

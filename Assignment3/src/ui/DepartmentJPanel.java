@@ -6,7 +6,15 @@
 package ui;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.course.Course;
+import model.department.Department;
+import model.employer.Employer;
+import model.person.Alumni;
+import model.person.Student;
+import model.university.University;
 
 /**
  *
@@ -17,10 +25,18 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DepartmentJPanel
      */
-     JPanel mainWorkArea;
-    public DepartmentJPanel( JPanel mainWorkArea) {
+    JPanel mainWorkArea;
+
+    public DepartmentJPanel(JPanel mainWorkArea) {
+
+    }
+    University university;
+
+    DepartmentJPanel(JPanel mainWorkArea, University university) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.university = university;
+        populateDepartmentCombo();
     }
 
     /**
@@ -33,7 +49,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblRole2 = new javax.swing.JLabel();
-        cmbRoles = new javax.swing.JComboBox<>();
+        cmbDepartment = new javax.swing.JComboBox<>();
         lblRole1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         CoursePanel = new javax.swing.JPanel();
@@ -73,11 +89,11 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         lblRole2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRole2.setText("University Name");
 
-        cmbRoles.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        cmbRoles.setForeground(new java.awt.Color(65, 82, 118));
-        cmbRoles.addActionListener(new java.awt.event.ActionListener() {
+        cmbDepartment.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        cmbDepartment.setForeground(new java.awt.Color(65, 82, 118));
+        cmbDepartment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbRolesActionPerformed(evt);
+                cmbDepartmentActionPerformed(evt);
             }
         });
 
@@ -85,6 +101,17 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         lblRole1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblRole1.setForeground(new java.awt.Color(114, 150, 180));
         lblRole1.setText("Department :");
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         CoursePanel.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -163,7 +190,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Student", "Courses", "Employer", "Promotion", "Salary"
+                "Student", "Courses", "GPA", "Employer", "Salary"
             }
         ));
         jScrollPane3.setViewportView(tblAlumni);
@@ -415,7 +442,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lblRole1)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(116, 116, 116)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85))))
@@ -432,7 +459,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRole1))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -453,29 +480,29 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolesActionPerformed
+    private void cmbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartmentActionPerformed
         // TODO add your handling code here:
-        //updateSupplierVisibility();
-    }//GEN-LAST:event_cmbRolesActionPerformed
+        populateCourseTable();
+    }//GEN-LAST:event_cmbDepartmentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-       LoginScreen loginScreen = new LoginScreen(mainWorkArea);
-       mainWorkArea.add("LoginScreen", loginScreen);
-       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-       layout.previous(mainWorkArea);
+        LoginScreen loginScreen = new LoginScreen(mainWorkArea);
+        mainWorkArea.add("LoginScreen", loginScreen);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.previous(mainWorkArea);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCourseActionPerformed
         // TODO add your handling code here:
-       CoursesJPanel courseJPanel = new CoursesJPanel(mainWorkArea);
-       mainWorkArea.add("CourseJPanel", courseJPanel);
-       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-       layout.next(mainWorkArea);
+        CoursesJPanel courseJPanel = new CoursesJPanel(mainWorkArea);
+        mainWorkArea.add("CourseJPanel", courseJPanel);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
     }//GEN-LAST:event_btnAddCourseActionPerformed
 
     private void btnUpdateCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCourseActionPerformed
         // TODO add your handling code here:
-        
+
         CourseUpdateJPanel1 courseJPanel = new CourseUpdateJPanel1(mainWorkArea);
         mainWorkArea.add("CourseJPanel", courseJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
@@ -484,11 +511,33 @@ public class DepartmentJPanel extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-         AlumniJPanel aluminiJPanel = new AlumniJPanel(mainWorkArea);
-       mainWorkArea.add("AluminiJPanel", aluminiJPanel);
+        AlumniJPanel aluminiJPanel = new AlumniJPanel(mainWorkArea);
+        mainWorkArea.add("AluminiJPanel", aluminiJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
     }//GEN-LAST:event_btnViewActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        int index = jTabbedPane1.getSelectedIndex();
+        if (index == 0) {
+            populateCourseTable();
+        } else if (index == 1) {
+            populateAlumniTable();
+        } else if (index == 2) {
+            populateEmployerTable();
+        } else if(index == 3) {
+            populateFacultyTable();
+        } else if(index == 4) {
+            populateStudentsTable();
+        }
+       
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -501,7 +550,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnUpdateCourse;
     private javax.swing.JButton btnView;
-    private javax.swing.JComboBox<Object> cmbRoles;
+    private javax.swing.JComboBox<Object> cmbDepartment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -525,4 +574,114 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblFaculty;
     private javax.swing.JTable tblStudent;
     // End of variables declaration//GEN-END:variables
+
+    private void populateCourseTable() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblCourse.getModel();
+            model.setRowCount(0);
+            for (Course course : ((Department) cmbDepartment.getSelectedItem()).getCourseList().getCourseList()) {
+                StringBuffer sb = new StringBuffer();
+
+                for (String courceContent : course.getCourseContentList()) {
+                    sb.append(courceContent);
+                    sb.append(", ");
+                }
+                String courseContentString = sb.toString();
+                Object row[] = new Object[4];
+                row[0] = course.getCourseCode();
+                row[1] = course.getCourseName();
+                row[2] = courseContentString;
+                row[3] = String.valueOf(course.getRatingPercent());
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void populateDepartmentCombo() {
+        cmbDepartment.removeAllItems();
+        for (Department dept : university.getDepartmentList()) {
+            cmbDepartment.addItem(dept);
+        }
+    }
+
+    private void populateAlumniTable() {
+                try {
+            DefaultTableModel model = (DefaultTableModel) tblAlumni.getModel();
+            model.setRowCount(0);
+            for (Alumni alumni : ((Department) cmbDepartment.getSelectedItem()).getAlumniDirectory().getAlumniDir()) {
+                StringBuffer sb = new StringBuffer();
+
+                for (Course course : alumni.getCourseCatalog().getCourseList()) {
+                    sb.append(course.getCourseCode());
+                    sb.append(", ");
+                }
+                String courseNameString = sb.toString();
+                Object row[] = new Object[4];
+                row[0] = String.valueOf(alumni.getFirstName() + " " + alumni.getLastName());
+                row[1] = courseNameString;
+                row[2] = String.valueOf(alumni.getGpa());
+                row[3] = alumni.getEmployer();
+//                row[4] = String.valueOf(alumni.getSalary());
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void populateEmployerTable() {
+                try {
+            DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+            model.setRowCount(0);
+            for (Employer employer : ((Department) cmbDepartment.getSelectedItem()).getEmployerList()) {
+                StringBuffer sb = new StringBuffer();
+
+                for (String courceContent : employer.getEmploymentCourses()) {
+                    sb.append(courceContent);
+                    sb.append(", ");
+                }
+                String courseContentString = sb.toString();
+                Object row[] = new Object[4];
+                row[0] = employer.getName();
+                row[1] = courseContentString;
+//                row[2] = courseContentString;
+//                row[3] = String.valueOf(course.getRatingPercent());
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void populateFacultyTable() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void populateStudentsTable() {
+                        try {
+            DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
+            model.setRowCount(0);
+            for (Student student : ((Department) cmbDepartment.getSelectedItem()).getStudentdirectory().studentList) {
+                StringBuffer sb = new StringBuffer();
+
+                for (Course course : student.getCourseCatalog().getCourseList()) {
+                    sb.append(course.getCourseCode());
+                    sb.append(", ");
+                }
+                String courseNameString = sb.toString();
+                Object row[] = new Object[4];
+                row[0] = String.valueOf(student.getId());
+                row[1] = String.valueOf(student.getFirstName() + " " + student.getLastName());
+                row[2] = courseNameString;
+                row[3] = String.valueOf(student.getGpa());
+//                row[3] = alumni.getEmployer();
+//                row[4] = String.valueOf(alumni.getSalary());
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+
+        }
+    }
 }

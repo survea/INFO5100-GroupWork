@@ -29,6 +29,14 @@ public class StudentDirectory {
 
     }
 
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
     public List<Student> addStudent(Student student) {
         studentList.add(student);
         return studentList;

@@ -7,6 +7,8 @@ package ui;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.university.University;
+import model.university.UniversityDirectory;
 
 /**
  *
@@ -19,8 +21,14 @@ public class LoginScreen extends javax.swing.JPanel {
      */
     JPanel mainWorkArea;
     public LoginScreen(JPanel mainWorkArea) {
+    }
+    UniversityDirectory universityDirectory;
+
+    LoginScreen(JPanel mainWorkArea, UniversityDirectory universityDirectory) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.universityDirectory = universityDirectory;
+        populateUniversityCombo();
     }
 
     /**
@@ -34,7 +42,7 @@ public class LoginScreen extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         lblRole2 = new javax.swing.JLabel();
-        cmbRoles = new javax.swing.JComboBox<>();
+        cmbUniversity = new javax.swing.JComboBox<>();
         btnLogin = new javax.swing.JButton();
         lblRole = new javax.swing.JLabel();
         lblRole1 = new javax.swing.JLabel();
@@ -50,12 +58,12 @@ public class LoginScreen extends javax.swing.JPanel {
         lblRole2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRole2.setText("University Login");
 
-        cmbRoles.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        cmbRoles.setForeground(new java.awt.Color(65, 82, 118));
-        cmbRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select University" }));
-        cmbRoles.addActionListener(new java.awt.event.ActionListener() {
+        cmbUniversity.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        cmbUniversity.setForeground(new java.awt.Color(65, 82, 118));
+        cmbUniversity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select University" }));
+        cmbUniversity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbRolesActionPerformed(evt);
+                cmbUniversityActionPerformed(evt);
             }
         });
 
@@ -81,7 +89,7 @@ public class LoginScreen extends javax.swing.JPanel {
                         .addComponent(lblRole2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbUniversity, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(187, 187, 187)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -93,7 +101,7 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblRole2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbUniversity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
@@ -146,14 +154,15 @@ public class LoginScreen extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolesActionPerformed
+    private void cmbUniversityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUniversityActionPerformed
         // TODO add your handling code here:
 //        updateSupplierVisibility();
-    }//GEN-LAST:event_cmbRolesActionPerformed
+    }//GEN-LAST:event_cmbUniversityActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        DepartmentJPanel departmentJPanel = new DepartmentJPanel(mainWorkArea);
+        University selectedUni = (University) cmbUniversity.getSelectedItem();
+        DepartmentJPanel departmentJPanel = new DepartmentJPanel(mainWorkArea, selectedUni);
         mainWorkArea.add("DepartmentJPanel", departmentJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
@@ -162,10 +171,17 @@ public class LoginScreen extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JComboBox<Object> cmbRoles;
+    private javax.swing.JComboBox<Object> cmbUniversity;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblRole1;
     private javax.swing.JLabel lblRole2;
     // End of variables declaration//GEN-END:variables
+
+    private void populateUniversityCombo() {
+        cmbUniversity.removeAllItems();
+        for (University univ : UniversityDirectory.getUniversityList()) {
+            cmbUniversity.addItem(univ);
+        }
+    }
 }
