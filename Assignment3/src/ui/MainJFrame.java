@@ -1,4 +1,3 @@
-
 package ui;
 
 import java.awt.CardLayout;
@@ -25,7 +24,7 @@ import model.university.UniversityDirectory;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-       /**
+    /**
      * Creates new form Main
      */
     EmployerDirectory empDir;
@@ -38,9 +37,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-        setSize(800,700);
+        setSize(800, 700);
         setResizable(false);
-       
+
         empDir = new EmployerDirectory();
         courseCatalog = new CourseCatalog();
         personDir = new PersonDirectory();
@@ -73,6 +72,13 @@ public class MainJFrame extends javax.swing.JFrame {
             "Angular",
             "HTML"
         };
+        String[] alumniJobPostions = {
+            "Associate",
+            "Senior",
+            "Lead",
+            "Manager",
+            "Higher"
+        };
         University northeastern = new University();
         List<String> csvCourseList = new ArrayList<>(Arrays.asList(newCourseList));
         northeastern.setUniversityName("Northeastern University");
@@ -84,7 +90,7 @@ public class MainJFrame extends javax.swing.JFrame {
         addDepartmentCourses(infoSys, csvCourseList);
         addDepartmentStudents(infoSys, studDir, newStudents);
         addDepartmentEmployers(infoSys, employeeList, emp1Courses);
-        addDepartmentAlumni(infoSys, alumniStudents);
+        addDepartmentAlumni(infoSys, alumniStudents, alumniJobPostions);
 
         northeastern.addDepartment(infoSys);
         UniversityDirectory.addUniversity(northeastern);
@@ -96,7 +102,7 @@ public class MainJFrame extends javax.swing.JFrame {
         courseCatalog.getCourseList().forEach(System.out::println);
         EmployerDirectory.employerList.forEach(System.out::println);
         setLoginScreen();
-        
+
     }
 
     /**
@@ -166,10 +172,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void setLoginScreen() {
 
-       LoginScreen loginScreen = new LoginScreen(mainWorkArea, univDir);
-       mainWorkArea.add("LoginScreen", loginScreen);
-       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-       layout.next(mainWorkArea);
+        LoginScreen loginScreen = new LoginScreen(mainWorkArea, univDir);
+        mainWorkArea.add("LoginScreen", loginScreen);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
 
     }
 
@@ -223,14 +229,14 @@ public class MainJFrame extends javax.swing.JFrame {
         EmployerDirectory.addEmployer(employ3);
     }
 
-    private void addDepartmentAlumni(Department dept, String[] alumniStudents) {
+    private void addDepartmentAlumni(Department dept, String[] alumniStudents, String[] alumniJobPostions) {
         List<String> csvAlumniList = new ArrayList<>(Arrays.asList(alumniStudents));
         for (String student : csvAlumniList) {
             String[] tokens = student.split(COMMA_DELIMITER);
             CourseCatalog alumniCourseCatalog = new CourseCatalog();
             alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(0));
             alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
-            Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]),Double.parseDouble(tokens[5]));
+            Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]), Double.parseDouble(tokens[5]), alumniJobPostions[0]);
             dept.addAlumni(alumniDetails);
 //            AlumniDirectory.addAlumni(alumniDetails);
             PersonDirectory.addPerson(alumniDetails);
@@ -250,5 +256,4 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainWorkArea;
     // End of variables declaration//GEN-END:variables
 
-  
 }

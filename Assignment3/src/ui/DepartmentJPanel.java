@@ -185,13 +185,13 @@ public class DepartmentJPanel extends javax.swing.JPanel {
 
         tblAlumni.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Student", "Courses", "GPA", "Employer", "Salary"
+                "Student", "Courses", "GPA", "Employer", "Salary", "EmploymentRating"
             }
         ));
         jScrollPane3.setViewportView(tblAlumni);
@@ -624,12 +624,13 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                     sb.append(", ");
                 }
                 String courseNameString = sb.toString();
-                Object row[] = new Object[5];
+                Object row[] = new Object[6];
                 row[0] = String.valueOf(alumni.getFirstName() + " " + alumni.getLastName());
                 row[1] = courseNameString;
                 row[2] = String.valueOf(alumni.getGpa());
                 row[3] = alumni.getEmployer();
                 row[4] = String.valueOf(alumni.getSalary());
+                row[5] = String.valueOf(alumni.getEmploymentRatingPercent());
                 model.addRow(row);
             }
         } catch (Exception e) {

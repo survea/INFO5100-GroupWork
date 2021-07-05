@@ -20,13 +20,18 @@ public class Alumni extends Student {
     private String employer;
     private List<EmploymentHistory> employmentHistory;
     private double Salary;
+    private String jobPostion;
+    private double employmentRating;
+    private double employmentRatingPercent;
 
-    public Alumni(String employer, List<EmploymentHistory> employmentHistory, CourseCatalog course, double gpa, int id, String firstName, String lastName, int age, double salary) {
+    public Alumni(String employer, List<EmploymentHistory> employmentHistory, CourseCatalog course, double gpa, int id, String firstName, String lastName, int age, double salary, String jobPostion) {
         super(gpa, id, firstName, lastName, age);
         this.courseCatalog = course;
         this.employer = employer;
         this.employmentHistory = employmentHistory;
         this.Salary = salary;
+        this.jobPostion = jobPostion;
+        calcEmploymentRating();
     }
 
 //    public Alumni() {
@@ -68,9 +73,70 @@ public class Alumni extends Student {
         this.Salary = Salary;
     }
 
+    public String getJobPostion() {
+        return jobPostion;
+    }
+
+    public void setJobPostion(String jobPostion) {
+        this.jobPostion = jobPostion;
+    }
+
+    public double getEmploymentRating() {
+        return employmentRating;
+    }
+
+    public void setEmploymentRating(double employmentRating) {
+        this.employmentRating = employmentRating;
+    }
+
+    public double getEmploymentRatingPercent() {
+        return employmentRatingPercent;
+    }
+
+    public void setEmploymentRatingPercent(double employmentRatingPercent) {
+        this.employmentRatingPercent = employmentRatingPercent;
+    }
+
+    public double calcEmploymentRating() {
+        if (getSalary() > 0 && getSalary() <= 50000) {
+            setEmploymentRating(getEmploymentRating() + 0.3);
+        } else if (getSalary() > 50000 && getSalary() < 100000) {
+            setEmploymentRating(getEmploymentRating() + 0.6);
+        } else if (getSalary() > 100000) {
+            setEmploymentRating(getEmploymentRating() + 1);
+        } else {
+            setEmploymentRating(getEmploymentRating() + 0);
+        }
+        if(null != getJobPostion()) switch (getJobPostion()) {
+            case "Associate":
+                setEmploymentRating(getEmploymentRating() + 0.2);
+                break;
+            case "Senior":
+                setEmploymentRating(getEmploymentRating() + 0.4);
+                break;
+            case "Lead":
+                setEmploymentRating(getEmploymentRating() + 0.6);
+                break;
+            case "Manager":
+                setEmploymentRating(getEmploymentRating() + 0.8);
+                break;
+            case "Higher":
+                setEmploymentRating(getEmploymentRating() + 1);
+                break;
+            default:
+                break;
+        }
+        return calculateEmploymentRatingPercent();
+    }
+
     @Override
     public String toString() {
         return "Alumni{" + "id " + super.getId() + ", first name " + super.getFirstName() + ", last name " + super.getLastName() + ", employer=" + employer + ", employmentHistory=" + employmentHistory + '}';
+    }
+
+    private double calculateEmploymentRatingPercent() {
+        setEmploymentRatingPercent((getEmploymentRating() * 100)/ 2); // deviding by 2 because rating is based on salary and position;
+        return getEmploymentRatingPercent();
     }
 
 }
