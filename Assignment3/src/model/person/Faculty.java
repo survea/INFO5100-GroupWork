@@ -5,7 +5,10 @@
  */
 package model.person;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.course.Course;
+import model.course.CourseCatalog;
 
 /**
  *
@@ -13,27 +16,34 @@ import model.course.Course;
  */
 public class Faculty extends Person {
 
-    private Course course;
-    private static int rating;
+    private CourseCatalog courseList;
+    private double rating;
     private String position;
+    private List<Integer> allRatings;
+    ArrayList <FacultyAssignment> facultyAssignments;
+    private double salary;
 
-    public Faculty() {
+    public Faculty(CourseCatalog course, List<Integer> allRating, int id, String firstName, String lastName, int age, double salary) {
+    super(id, firstName, lastName, age);
+        this.courseList = course;
+        this.salary = salary;
+        this.allRatings = allRating;
     }
 
-    public Course getCourse() {
-        return course;
-    }
+//    public Course getCourse() {
+//        return course;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public static int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public static void setRating(int rating) {
-        Faculty.rating = rating;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public String getPosition() {
@@ -42,5 +52,41 @@ public class Faculty extends Person {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public List<Integer> getAllRatings() {
+        return allRatings;
+    }
+
+    public void setAllRatings(List<Integer> allRatings) {
+        this.allRatings = allRatings;
+    }
+
+    public CourseCatalog getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(CourseCatalog courseList) {
+        this.courseList = courseList;
+    }
+
+    public ArrayList<FacultyAssignment> getFacultyAssignments() {
+        return facultyAssignments;
+    }
+
+    public void setFacultyassignments(ArrayList<FacultyAssignment> facultyAssignments) {
+        this.facultyAssignments = facultyAssignments;
+    }
+    
+    public void addNewRating(int newRating) {
+        this.allRatings.add(newRating);
+    }
+    public void calcRating() {
+//        int sum = allRatings.stream().mapToInt(Integer::intValue).sum();
+        int sum = 0;
+    for (int i: allRatings) {
+        sum += i;
+    }
+        setRating(sum/allRatings.size());
     }
 }

@@ -11,10 +11,10 @@ import model.employer.Employer;
 import model.employer.EmployerDirectory;
 import model.person.Alumni;
 import model.person.AlumniDirectory;
+import model.person.Faculty;
 import model.person.PersonDirectory;
 import model.person.Student;
 import model.person.StudentDirectory;
-import model.person.alumniEmployment.EmploymentHistory;
 import model.university.University;
 import model.university.UniversityDirectory;
 
@@ -34,18 +34,18 @@ public class MainJFrame extends javax.swing.JFrame {
     AlumniDirectory alumniDirectory;
     UniversityDirectory univDir;
     final String COMMA_DELIMITER = ",";
-
+    
     public MainJFrame() {
         initComponents();
         setSize(800, 700);
         setResizable(false);
-
+        
         empDir = new EmployerDirectory();
-        courseCatalog = new CourseCatalog();
+//        courseCatalog = new CourseCatalog();
         personDir = new PersonDirectory();
-        alumniDirectory = new AlumniDirectory();
+//        alumniDirectory = new AlumniDirectory();
         univDir = new UniversityDirectory();
-
+        
         String[] newStudents = {
             "1,47,Dan,Peters,3.75",
             "3,37,Allan,Simpson,3.85",
@@ -55,6 +55,11 @@ public class MainJFrame extends javax.swing.JFrame {
             "4,47,Dan1,Peters,3.75,6000",
             "5,37,Allan1,Simpson,3.85,4900",
             "6,27,Don1,Johnson,3.80,11000"
+        };
+        String[] facultyData = {
+            "7,47,Dan1,Peters,INFO5100,[1;3;5;2;4],6000",
+            "8,37,Allan1,Simpson,INFO5001,[1;2;2;2;3],4900",
+            "9,27,Don1,Johnson,CSYE6200,[1;2;3;2;4],11000"
         };
         String[] newCourseList = {
             "INFO5100,AED,info sys course,4,0",
@@ -82,27 +87,28 @@ public class MainJFrame extends javax.swing.JFrame {
         University northeastern = new University();
         List<String> csvCourseList = new ArrayList<>(Arrays.asList(newCourseList));
         northeastern.setUniversityName("Northeastern University");
-
+        
         Department infoSys = new Department();
         studDir = new StudentDirectory(infoSys);
         infoSys.setDepartmentName("Information system");
-
+        
         addDepartmentCourses(infoSys, csvCourseList);
         addDepartmentStudents(infoSys, studDir, newStudents);
+        addDepartmentFaculty(infoSys, facultyData);
         addDepartmentEmployers(infoSys, employeeList, emp1Courses);
         addDepartmentAlumni(infoSys, alumniStudents, alumniJobPostions);
-
+        
         northeastern.addDepartment(infoSys);
         UniversityDirectory.addUniversity(northeastern);
         UniversityDirectory.getUniversityList().forEach(System.out::println);
-
+        
         calculateRating();
-
+        
         PersonDirectory.getPersonDir().forEach(System.out::println);
-        courseCatalog.getCourseList().forEach(System.out::println);
+//        courseCatalog.getCourseList().forEach(System.out::println);
         EmployerDirectory.employerList.forEach(System.out::println);
         setLoginScreen();
-
+        
     }
 
     /**
@@ -169,16 +175,16 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void setLoginScreen() {
-
+        
         LoginScreen loginScreen = new LoginScreen(mainWorkArea, univDir);
         mainWorkArea.add("LoginScreen", loginScreen);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
-
+        
     }
-
+    
     private void addDepartmentCourses(Department infoSys, List<String> csvCourseList) {
         String[] tokens = csvCourseList.get(0).split(COMMA_DELIMITER);
         Course info5100 = new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]));
@@ -186,38 +192,63 @@ public class MainJFrame extends javax.swing.JFrame {
         info5100.addCourseContent("HTML");
         info5100.addCourseContent("Javascript");
         infoSys.addCourse(info5100);
-
+        
         tokens = csvCourseList.get(1).split(COMMA_DELIMITER);
         Course INFO5001 = new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]));
         INFO5001.addCourseContent("Angular");
         INFO5001.addCourseContent("React");
         INFO5001.addCourseContent("NodeJS");
         infoSys.addCourse(INFO5001);
-
+        
         tokens = csvCourseList.get(2).split(COMMA_DELIMITER);
         Course CSYE6200 = new Course(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]));
         CSYE6200.addCourseContent("sql");
         CSYE6200.addCourseContent("mongoDB");
         infoSys.addCourse(CSYE6200);
     }
-
+    
     private void addDepartmentStudents(Department dept, StudentDirectory studDir, String[] newStudents) {
         List<String> csvStudentList = new ArrayList<>(Arrays.asList(newStudents));
         for (String student : csvStudentList) {
             String[] tokens = student.split(COMMA_DELIMITER);
             Student studentDetails = new Student(Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]));
-
+            
             studentDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
             studentDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
             dept.addStudent(studentDetails);
             PersonDirectory.addPerson(studentDetails);
         }
     }
-
+    
+    private void addDepartmentFaculty(Department dept, String[] newFaculties) {
+        List<String> csvFacultyList = new ArrayList<>(Arrays.asList(newFaculties));
+        for (String faculty : csvFacultyList) {
+            String[] tokens = faculty.split(COMMA_DELIMITER);
+            CourseCatalog facultyCourseCatalog = new CourseCatalog(dept);
+            facultyCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(0));
+            facultyCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
+            
+            String replace = tokens[5].replace("[", "");
+            String replace1 = replace.replace("]", "");
+            String[] ratingStringArray = replace1.split(";");
+//            List<String> arrayList = new ArrayList<String>(Arrays.asList(replace1.split("$")));
+            List<Integer> ratingList = new ArrayList<Integer>();
+            for (String fav : ratingStringArray) {
+                ratingList.add(Integer.parseInt(fav));
+            }
+            Faculty facultyDetails = new Faculty(facultyCourseCatalog, ratingList, Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]), Double.parseDouble(tokens[6]));
+//"7,47,Dan1,Peters,INFO5100,[1,3,5,2,4],6000",
+//            facultyDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
+//            facultyDetails.addStudentCourse(dept.getCourseList().getCourseList().get(0));
+            dept.addFaculty(facultyDetails);
+            PersonDirectory.addPerson(facultyDetails);
+        }
+    }
+    
     private void addDepartmentEmployers(Department dept, String[] employeeList, String[] emp1Courses) {
         List<String> csvEmployeeList = new ArrayList<>(Arrays.asList(employeeList));
         List<String> csvEmp1Courses = new ArrayList<>(Arrays.asList(emp1Courses));
-
+        
         Employer employ1 = new Employer(csvEmployeeList.get(0), csvEmp1Courses);
         Employer employ2 = new Employer(csvEmployeeList.get(1), csvEmp1Courses);
         Employer employ3 = new Employer(csvEmployeeList.get(2), csvEmp1Courses);
@@ -228,12 +259,12 @@ public class MainJFrame extends javax.swing.JFrame {
         EmployerDirectory.addEmployer(employ2);
         EmployerDirectory.addEmployer(employ3);
     }
-
+    
     private void addDepartmentAlumni(Department dept, String[] alumniStudents, String[] alumniJobPostions) {
         List<String> csvAlumniList = new ArrayList<>(Arrays.asList(alumniStudents));
         for (String student : csvAlumniList) {
             String[] tokens = student.split(COMMA_DELIMITER);
-            CourseCatalog alumniCourseCatalog = new CourseCatalog();
+            CourseCatalog alumniCourseCatalog = new CourseCatalog(dept);
             alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(0));
             alumniCourseCatalog.addCourse(dept.getCourseList().getCourseList().get(2));
             Alumni alumniDetails = new Alumni("Employee1", null, alumniCourseCatalog, Double.parseDouble(tokens[4]), Integer.parseInt(tokens[0]), tokens[2], tokens[3], Integer.parseInt(tokens[1]), Double.parseDouble(tokens[5]), alumniJobPostions[0]);
@@ -242,13 +273,14 @@ public class MainJFrame extends javax.swing.JFrame {
             PersonDirectory.addPerson(alumniDetails);
         }
     }
-
+    
     private void calculateRating() {
         Department infosysDept = UniversityDirectory.getUniversityList().get(0).getDepartmentList().get(0);
-
+        
         UniversityDirectory.getUniversityList().get(0).getDepartmentList().forEach(dept -> {
             dept.calculateCourseRatingPercent();
             dept.getCourseList().getCourseList().forEach(System.out::println);
+            
         });
     }
 

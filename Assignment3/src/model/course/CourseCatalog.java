@@ -7,16 +7,19 @@ package model.course;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.department.Department;
 
 /**
  *
  * @author Hp
  */
 public class CourseCatalog {
+    Department department;
     private List<Course> courseList;
 
-    public CourseCatalog() {
+    public CourseCatalog(Department department) {
         courseList = new ArrayList<>();
+        department = department;
     }
 
     public List<Course> getCourseList() {

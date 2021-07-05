@@ -15,17 +15,17 @@ import model.person.FacultyAssignment;
  */
 public class CourseOffer {
     Course course;
-    FacultyAssignment facultyassignment;
+    FacultyAssignment facultyAssignment;
 
     public CourseOffer(Course c) {
         course = c;
     }
     public void AssignAsTeacher(Faculty fp) {
 
-        facultyassignment = new FacultyAssignment(fp, this);
+        facultyAssignment = new FacultyAssignment(fp, this);
     }
 
     public Faculty getFacultyProfile() {
-        return facultyassignment.getFacultyProfile();
+        return facultyAssignment.getFacultyProfile();
     }
 }

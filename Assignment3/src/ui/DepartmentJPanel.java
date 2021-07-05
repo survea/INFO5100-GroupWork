@@ -14,6 +14,7 @@ import model.course.Course;
 import model.department.Department;
 import model.employer.Employer;
 import model.person.Alumni;
+import model.person.Faculty;
 import model.person.Student;
 import model.university.University;
 
@@ -663,7 +664,28 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     }
 
     private void populateFacultyTable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+            DefaultTableModel model = (DefaultTableModel) tblFaculty.getModel();
+            model.setRowCount(0);
+            for (Faculty faculty : ((Department) cmbDepartment.getSelectedItem()).getFacultydirectory().getFacultyList()) {
+                StringBuffer sb = new StringBuffer();
+
+                for (Course course : faculty.getCourseList().getCourseList()) {
+                    sb.append(course.getCourseCode());
+                    sb.append(", ");
+                }
+                faculty.calcRating();
+                String courseNameString = sb.toString();
+                Object row[] = new Object[4];
+                row[0] = String.valueOf(faculty.getFirstName() + " " + faculty.getLastName());
+                row[1] = courseNameString;
+//                row[2] = courseContentString;
+                row[3] = String.valueOf(faculty.getRating());
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+
+        }
     }
 
     private void populateStudentsTable() {

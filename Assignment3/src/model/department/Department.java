@@ -13,6 +13,7 @@ import model.course.CourseCatalog;
 import model.employer.Employer;
 import model.person.Alumni;
 import model.person.AlumniDirectory;
+import model.person.Faculty;
 import model.person.FacultyDirectory;
 import model.person.Student;
 import model.person.StudentDirectory;
@@ -31,10 +32,11 @@ public class Department {
     public List<Employer> employerList;
 
     public Department() {
-        courseList = new CourseCatalog();
+        courseList = new CourseCatalog(this);
         employerList = new ArrayList<>();
-        alumniDirectory = new AlumniDirectory();
+        alumniDirectory = new AlumniDirectory(this);
         studentdirectory = new StudentDirectory(this);
+        facultydirectory = new FacultyDirectory(this);
     }
 
     public String getDepartmentName() {
@@ -99,9 +101,15 @@ public class Department {
         alumniDirectory.addAlumni(alumni);
         return alumniDirectory;
     }
-        public StudentDirectory addStudent(Student student) {
+
+    public StudentDirectory addStudent(Student student) {
         studentdirectory.addStudent(student);
         return studentdirectory;
+    }
+
+    public FacultyDirectory addFaculty(Faculty faculty) {
+        facultydirectory.newFacultyProfile(faculty);
+        return facultydirectory;
     }
 
     public void calculateCourseRatingPercent() {
@@ -111,11 +119,11 @@ public class Department {
                 if (alumni.getCourseCatalog().getCourseList().contains(course)) {
 //                    courseAlumniCount++;
                     course.setCourseRating(course.getCourseRating() + 1);
-                    if(alumni.getSalary()> 0 && alumni.getSalary()<= 50000 ) {
+                    if (alumni.getSalary() > 0 && alumni.getSalary() <= 50000) {
                         course.setCourseRating(course.getCourseRating() + 0.3);
-                    }else if(alumni.getSalary()> 50000 && alumni.getSalary()< 100000 ) {
+                    } else if (alumni.getSalary() > 50000 && alumni.getSalary() < 100000) {
                         course.setCourseRating(course.getCourseRating() + 0.6);
-                    }else if(alumni.getSalary()> 100000 ) {
+                    } else if (alumni.getSalary() > 100000) {
                         course.setCourseRating(course.getCourseRating() + 1);
                     } else {
                         course.setCourseRating(course.getCourseRating() + 0);
@@ -131,22 +139,22 @@ public class Department {
                     }
                 }
             }
-            double calcCourseRating = (course.getCourseRating()  * 100)/ (employerList.size() + (alumniDirectory.getAlumniDir().size())*2);
+            double calcCourseRating = (course.getCourseRating() * 100) / (employerList.size() + (alumniDirectory.getAlumniDir().size()) * 2);
             course.setRatingPercent(calcCourseRating);
         }
     }
-    
+
     public double calculateDeptCoursesRating() {
         double courseRankingSum = 0;
         for (Course course : courseList.getCourseList()) {
             courseRankingSum = courseRankingSum + course.getRatingPercent();
         }
-        return (courseRankingSum/ courseList.getCourseList().size());
+        return (courseRankingSum / courseList.getCourseList().size());
     }
 
     @Override
     public String toString() {
         return departmentName;
     }
-    
+
 }

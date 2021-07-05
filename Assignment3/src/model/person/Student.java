@@ -8,6 +8,7 @@ package model.person;
 import java.util.List;
 import model.course.Course;
 import model.course.CourseCatalog;
+import model.department.Department;
 
 /**
  *
@@ -17,10 +18,11 @@ public class Student extends Person {
 
     private CourseCatalog courseCatalog;
     private double gpa;
+    Department department;
 
     public Student(double gpa, int id, String firstName, String lastName, int age) {
         super(id, firstName, lastName, age);
-        courseCatalog = new CourseCatalog();
+        courseCatalog = new CourseCatalog(department);
 
         this.gpa = gpa;
     }

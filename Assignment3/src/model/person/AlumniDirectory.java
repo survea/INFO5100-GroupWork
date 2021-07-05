@@ -7,14 +7,15 @@ package model.person;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.department.Department;
 
 /**
  *
  * @author Hp
  */
 public class AlumniDirectory {
-
-    public List<Alumni> alumniDir;
+    private Department department;
+    private List<Alumni> alumniDir;
 
     public List<Alumni> getAlumniDir() {
         return alumniDir;
@@ -24,7 +25,8 @@ public class AlumniDirectory {
         this.alumniDir = alumniDir;
     }
 
-    public AlumniDirectory() {
+    public AlumniDirectory(Department dept) {
+        department = dept;
         alumniDir = new ArrayList<>();
     }
 
