@@ -6,7 +6,10 @@
 package ui;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.course.Course;
+import model.university.University;
 
 /**
  *
@@ -18,9 +21,19 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
      * Creates new form CoursesJPanel
      */
     JPanel mainWorkArea;
-    public CourseUpdateJPanel1(JPanel mainWorkArea) {
+    University university;
+    Course course;
+    public CourseUpdateJPanel1(JPanel mainWorkArea,University university,Course course) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.university = university;
+        this.course =course;
+        
+       txtCourseCode.setText(course.getCourseCode());
+       txtCourseName.setText(course.getCourseName());
+       txtDesc.setText(course.getCourseDescription());
+       txtKeyword.setText(String.valueOf(course.getCourseContentList()));
+       txtCredits.setText(String.valueOf(course.getCredits()));
     }
 
     /**
@@ -41,17 +54,17 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
         txtCourseName = new javax.swing.JTextField();
         lblkeywords = new javax.swing.JLabel();
         lblCredits = new javax.swing.JLabel();
-        txtCity = new javax.swing.JTextField();
+        txtCredits = new javax.swing.JTextField();
         lblDesc = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDesc = new javax.swing.JTextArea();
         btnSubmit = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(254, 254, 254));
 
-        lblTitle.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(109, 144, 149));
+        lblTitle.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(78, 105, 151));
         lblTitle.setText("Update Course Structure");
 
         btnBack.setBackground(new java.awt.Color(254, 254, 254));
@@ -99,9 +112,9 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
         lblDesc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDesc.setText("Description:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txtDesc.setColumns(20);
+        txtDesc.setRows(5);
+        jScrollPane3.setViewportView(txtDesc);
 
         javax.swing.GroupLayout addjPanel3Layout = new javax.swing.GroupLayout(addjPanel3);
         addjPanel3.setLayout(addjPanel3Layout);
@@ -118,7 +131,7 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3)
-                    .addComponent(txtCity)
+                    .addComponent(txtCredits)
                     .addComponent(txtKeyword)
                     .addComponent(txtCourseName)
                     .addComponent(txtCourseCode))
@@ -142,7 +155,7 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCredits)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDesc)
@@ -176,7 +189,7 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(318, 318, 318)
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(17, 17, 17)
@@ -211,10 +224,20 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        backMethod();
+        if(txtCourseCode.getText().isEmpty() | txtKeyword.getText().isEmpty()|txtCourseName.getText().isEmpty()|txtCredits.getText().isEmpty()|txtDesc.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fillup all the fields","Error",JOptionPane.ERROR_MESSAGE);  
+        } else {
+            course.setCourseCode(txtCourseCode.getText());
+            course.setCourseName(txtCourseName.getText());
+            course.setCredits(Integer.parseInt(txtCredits.getText()));
+            course.setCourseDescription(txtDesc.getText());
+            JOptionPane.showMessageDialog(this, "Updated Course Information","Success",JOptionPane.INFORMATION_MESSAGE);  
+            backMethod();
+        }
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 private void backMethod() {
-        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea);
+        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea,university);
        mainWorkArea.add("DepartmentJPanel", courseJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
@@ -225,16 +248,16 @@ private void backMethod() {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblCourseCode;
     private javax.swing.JLabel lblCourseName;
     private javax.swing.JLabel lblCredits;
     private javax.swing.JLabel lblDesc;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblkeywords;
-    private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCourseCode;
     private javax.swing.JTextField txtCourseName;
+    private javax.swing.JTextField txtCredits;
+    private javax.swing.JTextArea txtDesc;
     private javax.swing.JTextField txtKeyword;
     // End of variables declaration//GEN-END:variables
 }

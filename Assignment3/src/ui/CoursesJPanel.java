@@ -7,6 +7,8 @@ package ui;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.course.Course;
+import model.university.University;
 
 /**
  *
@@ -18,9 +20,11 @@ public class CoursesJPanel extends javax.swing.JPanel {
      * Creates new form CoursesJPanel
      */
     JPanel mainWorkArea;
-    public CoursesJPanel(JPanel mainWorkArea) {
+    University university;
+    public CoursesJPanel(JPanel mainWorkArea, University university) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.university = university;
     }
 
     /**
@@ -50,8 +54,8 @@ public class CoursesJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(254, 254, 254));
 
-        lblTitle.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(109, 144, 149));
+        lblTitle.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(78, 105, 151));
         lblTitle.setText("Course Registration");
 
         btnBack.setBackground(new java.awt.Color(254, 254, 254));
@@ -168,15 +172,15 @@ public class CoursesJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(318, 318, 318)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(349, Short.MAX_VALUE))
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(278, 278, 278)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(302, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(17, 17, 17)
@@ -234,7 +238,7 @@ public class CoursesJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void backMethod() {
-        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea);
+        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea,university);
        mainWorkArea.add("DepartmentJPanel", courseJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);

@@ -124,7 +124,7 @@
               <Color blue="a2" green="6a" red="25" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="University Login"/>
+            <Property name="text" type="java.lang.String" value="University"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbUniversity">
@@ -159,7 +159,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="45" green="46" red="e5" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="LOGIN"/>
+            <Property name="text" type="java.lang.String" value="View"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder/>

@@ -37,7 +37,7 @@ public class MainJFrame extends javax.swing.JFrame {
     
     public MainJFrame() {
         initComponents();
-        setSize(800, 700);
+        setSize(800, 600);
         setResizable(false);
         
         empDir = new EmployerDirectory();

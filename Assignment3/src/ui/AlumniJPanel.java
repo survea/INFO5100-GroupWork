@@ -7,6 +7,13 @@ package ui;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.course.Course;
+import model.department.Department;
+import model.person.Alumni;
+import model.person.alumniEmployment.Employment;
+import model.person.alumniEmployment.EmploymentHistory;
+import model.university.University;
 
 /**
  *
@@ -18,9 +25,21 @@ public class AlumniJPanel extends javax.swing.JPanel {
      * Creates new form AlumniJPanel
      */
    JPanel mainWorkArea;
-    public AlumniJPanel( JPanel mainWorkArea) {
+   University university;
+   Alumni alumni;
+   Department department;
+    public AlumniJPanel( JPanel mainWorkArea,University university, Alumni alumni,Department department) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.university= university;
+        this. alumni =alumni;
+        this.department =department;
+        txtStudentID.setText(String.valueOf(alumni.getId()));
+        txtName.setText(String.valueOf(alumni.getFirstName() + " " + alumni.getLastName()));
+        txtCourses.setText(String.valueOf(alumni.getCourseCatalog()));
+        txtGpa.setText(String.valueOf(alumni.getGpa()));
+        
+        poplulateEmpHistory();
     }
 
     /**
@@ -35,13 +54,13 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         addjPanel3 = new javax.swing.JPanel();
         lblCourseCode = new javax.swing.JLabel();
-        txtCourseCode = new javax.swing.JTextField();
+        txtStudentID = new javax.swing.JTextField();
         lblCourseName = new javax.swing.JLabel();
-        txtCourseName = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         lblkeywords = new javax.swing.JLabel();
         lblCredits = new javax.swing.JLabel();
-        txtCity = new javax.swing.JTextField();
-        txtKeyword = new javax.swing.JTextField();
+        txtGpa = new javax.swing.JTextField();
+        txtCourses = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         addjPanel4 = new javax.swing.JPanel();
@@ -49,17 +68,12 @@ public class AlumniJPanel extends javax.swing.JPanel {
         tblEmployee = new javax.swing.JTable();
         btnAddAlumni = new javax.swing.JButton();
         addjPanel5 = new javax.swing.JPanel();
-        lblCourseCode1 = new javax.swing.JLabel();
-        txtCourseCode1 = new javax.swing.JTextField();
-        lblkeywords1 = new javax.swing.JLabel();
-        txtKeyword1 = new javax.swing.JTextField();
-        txtCity4 = new javax.swing.JTextField();
-        lblCredits4 = new javax.swing.JLabel();
+        btnFeedback = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(254, 254, 254));
 
-        lblTitle.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(109, 144, 149));
+        lblTitle.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(78, 105, 151));
         lblTitle.setText("Alumni Information");
 
         addjPanel3.setBackground(new java.awt.Color(254, 254, 254));
@@ -70,9 +84,9 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCourseCode.setForeground(new java.awt.Color(114, 150, 180));
         lblCourseCode.setText("Student ID:");
 
-        txtCourseCode.addActionListener(new java.awt.event.ActionListener() {
+        txtStudentID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCourseCodeActionPerformed(evt);
+                txtStudentIDActionPerformed(evt);
             }
         });
 
@@ -81,9 +95,9 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCourseName.setForeground(new java.awt.Color(114, 150, 180));
         lblCourseName.setText("Name:");
 
-        txtCourseName.addActionListener(new java.awt.event.ActionListener() {
+        txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCourseNameActionPerformed(evt);
+                txtNameActionPerformed(evt);
             }
         });
 
@@ -107,7 +121,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblCredits)
                         .addGap(18, 18, 18)
-                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtGpa, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(addjPanel3Layout.createSequentialGroup()
                         .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(addjPanel3Layout.createSequentialGroup()
@@ -119,14 +133,14 @@ public class AlumniJPanel extends javax.swing.JPanel {
                                 .addComponent(lblkeywords)
                                 .addGap(9, 9, 9)))
                         .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCourseCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStudentID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(addjPanel3Layout.createSequentialGroup()
-                                .addComponent(txtKeyword)
+                                .addComponent(txtCourses)
                                 .addGap(9, 9, 9)))
                         .addGap(166, 166, 166)
                         .addComponent(lblCourseName)
                         .addGap(18, 18, 18)
-                        .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(91, 91, 91))
         );
         addjPanel3Layout.setVerticalGroup(
@@ -134,16 +148,16 @@ public class AlumniJPanel extends javax.swing.JPanel {
             .addGroup(addjPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCourseCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCourseCode)
                     .addComponent(lblCourseName)
-                    .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblkeywords)
-                    .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCredits)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
 
@@ -223,64 +237,32 @@ public class AlumniJPanel extends javax.swing.JPanel {
         addjPanel5.setBackground(new java.awt.Color(254, 254, 254));
         addjPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Alumni Feedback", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu", 1, 15), new java.awt.Color(95, 139, 162))); // NOI18N
 
-        lblCourseCode1.setBackground(new java.awt.Color(254, 254, 254));
-        lblCourseCode1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        lblCourseCode1.setForeground(new java.awt.Color(114, 150, 180));
-        lblCourseCode1.setText("Recommended Courses:");
-
-        txtCourseCode1.addActionListener(new java.awt.event.ActionListener() {
+        btnFeedback.setBackground(new java.awt.Color(254, 254, 254));
+        btnFeedback.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        btnFeedback.setForeground(new java.awt.Color(100, 149, 162));
+        btnFeedback.setText("View Feedback");
+        btnFeedback.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnFeedback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCourseCode1ActionPerformed(evt);
+                btnFeedbackActionPerformed(evt);
             }
         });
-
-        lblkeywords1.setBackground(new java.awt.Color(254, 254, 254));
-        lblkeywords1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        lblkeywords1.setForeground(new java.awt.Color(114, 150, 180));
-        lblkeywords1.setText("Recommended Faculty:");
-
-        lblCredits4.setBackground(new java.awt.Color(254, 254, 254));
-        lblCredits4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        lblCredits4.setForeground(new java.awt.Color(114, 150, 180));
-        lblCredits4.setText("Suggestions(if any):");
 
         javax.swing.GroupLayout addjPanel5Layout = new javax.swing.GroupLayout(addjPanel5);
         addjPanel5.setLayout(addjPanel5Layout);
         addjPanel5Layout.setHorizontalGroup(
             addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addjPanel5Layout.createSequentialGroup()
-                .addGroup(addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addjPanel5Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(lblCredits4))
-                    .addGroup(addjPanel5Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCourseCode1)
-                            .addComponent(lblkeywords1))))
-                .addGap(18, 18, 18)
-                .addGroup(addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCourseCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtKeyword1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCity4, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(288, 288, 288)
+                .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addjPanel5Layout.setVerticalGroup(
             addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addjPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCourseCode1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCourseCode1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblkeywords1)
-                    .addComponent(txtKeyword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCredits4)
-                    .addComponent(txtCity4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -294,15 +276,15 @@ public class AlumniJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(189, 189, 189)
-                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(170, 170, 170)
+                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addjPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addjPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
+                        .addGap(339, 339, 339)
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,9 +302,9 @@ public class AlumniJPanel extends javax.swing.JPanel {
                 .addComponent(addjPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addjPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -330,33 +312,37 @@ public class AlumniJPanel extends javax.swing.JPanel {
         backMethod();
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtCourseCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCourseCodeActionPerformed
+    private void txtStudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCourseCodeActionPerformed
+    }//GEN-LAST:event_txtStudentIDActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         backMethod();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void txtCourseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCourseNameActionPerformed
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCourseNameActionPerformed
+    }//GEN-LAST:event_txtNameActionPerformed
 
     private void btnAddAlumniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAlumniActionPerformed
         // TODO add your handling code here:
-        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea);
+        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea,university,alumni,department);
         mainWorkArea.add("AluminiJPanel", aluminiJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
     }//GEN-LAST:event_btnAddAlumniActionPerformed
 
-    private void txtCourseCode1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCourseCode1ActionPerformed
+    private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCourseCode1ActionPerformed
+        AlumniFeedbackJPanel aluminiFeedback = new AlumniFeedbackJPanel(mainWorkArea,university,alumni,department);
+        mainWorkArea.add("AlumniFeedbackJPanel", aluminiFeedback);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
+    }//GEN-LAST:event_btnFeedbackActionPerformed
 
     private void backMethod() {
-        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea);
+        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea, university);
        mainWorkArea.add("DepartmentJPanel", courseJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
@@ -367,23 +353,44 @@ public class AlumniJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel addjPanel5;
     private javax.swing.JButton btnAddAlumni;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnFeedback;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblCourseCode;
-    private javax.swing.JLabel lblCourseCode1;
     private javax.swing.JLabel lblCourseName;
     private javax.swing.JLabel lblCredits;
-    private javax.swing.JLabel lblCredits4;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblkeywords;
-    private javax.swing.JLabel lblkeywords1;
     private javax.swing.JTable tblEmployee;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtCity4;
-    private javax.swing.JTextField txtCourseCode;
-    private javax.swing.JTextField txtCourseCode1;
-    private javax.swing.JTextField txtCourseName;
-    private javax.swing.JTextField txtKeyword;
-    private javax.swing.JTextField txtKeyword1;
+    private javax.swing.JTextField txtCourses;
+    private javax.swing.JTextField txtGpa;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtStudentID;
     // End of variables declaration//GEN-END:variables
+
+    private void poplulateEmpHistory() {
+        // WE NEED TO UPDATE HERE FOR EMP HISTORY
+//        try {
+//            DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+//            model.setRowCount(0);
+//            for (EmploymentHistory e : alumni.getEmploymentHistory() ) {
+//                StringBuffer sb = new StringBuffer();
+//
+//                for (Employment emp : e.getEmploymentList()) {
+//                    String courseNameString = sb.toString();
+//                Object row[] = new Object[6];
+//                row[0] = String.valueOf(alumni.getFirstName() + " " + alumni.getLastName());
+//                row[1] = courseNameString;
+//                row[2] = String.valueOf(alumni.getGpa());
+//                row[3] = alumni.getEmployer();
+//                row[4] = String.valueOf(alumni.getSalary());
+//                row[5] = String.valueOf(alumni.getEmploymentRatingPercent());
+//                model.addRow(row);
+//                }
+//                
+//            }
+//        } catch (Exception e) {
+//
+//        }
+    }
 }

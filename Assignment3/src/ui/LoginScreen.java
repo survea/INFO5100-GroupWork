@@ -21,6 +21,8 @@ public class LoginScreen extends javax.swing.JPanel {
      */
     JPanel mainWorkArea;
     public LoginScreen(JPanel mainWorkArea) {
+        initComponents();
+        populateUniversityCombo();
     }
     UniversityDirectory universityDirectory;
 
@@ -56,7 +58,7 @@ public class LoginScreen extends javax.swing.JPanel {
         lblRole2.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         lblRole2.setForeground(new java.awt.Color(37, 106, 162));
         lblRole2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRole2.setText("University Login");
+        lblRole2.setText("University");
 
         cmbUniversity.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         cmbUniversity.setForeground(new java.awt.Color(65, 82, 118));
@@ -70,7 +72,7 @@ public class LoginScreen extends javax.swing.JPanel {
         btnLogin.setBackground(new java.awt.Color(254, 254, 254));
         btnLogin.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(229, 70, 69));
-        btnLogin.setText("LOGIN");
+        btnLogin.setText("View");
         btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

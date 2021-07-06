@@ -7,6 +7,9 @@ package ui;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.department.Department;
+import model.person.Alumni;
+import model.university.University;
 
 /**
  *
@@ -18,9 +21,15 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
      * Creates new form CoursesJPanel
      */
     JPanel mainWorkArea;
-    public EmploymentHistoryJPanel(JPanel mainWorkArea) {
+    University university;
+    Alumni alumni;
+    Department department;
+    public EmploymentHistoryJPanel(JPanel mainWorkArea,University university,Alumni alumni,Department department) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.university =university;
+        this.alumni = alumni;
+        this.department =department;
     }
 
     /**
@@ -49,8 +58,8 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(254, 254, 254));
 
-        lblTitle.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(109, 144, 149));
+        lblTitle.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(78, 105, 151));
         lblTitle.setText(" New Employment Entry");
 
         btnBack.setBackground(new java.awt.Color(254, 254, 254));
@@ -163,17 +172,17 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(318, 318, 318)
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(57, Short.MAX_VALUE))
+                            .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(278, 278, 278)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,9 +231,9 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void backMethod() {
-        AlumniJPanel alumniJPanel = new AlumniJPanel(mainWorkArea);
+        AlumniJPanel alumniJPanel = new AlumniJPanel(mainWorkArea,university,alumni,department);
        mainWorkArea.add("AlumniJPanel", alumniJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
-         }
+    }
 }

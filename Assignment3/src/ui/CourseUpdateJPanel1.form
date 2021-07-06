@@ -36,7 +36,7 @@
                       <Component id="btnSubmit" min="-2" pref="106" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="307" max="32767" attributes="0"/>
+              <EmptySpace pref="267" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -72,10 +72,10 @@
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="18" style="1"/>
+          <Font name="Serif" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="95" green="90" red="6d" type="rgb"/>
+          <Color blue="97" green="69" red="4e" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Update Course Structure"/>
       </Properties>
@@ -135,7 +135,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtCity" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCredits" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtKeyword" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtCourseName" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtCourseCode" alignment="0" max="32767" attributes="0"/>
@@ -165,7 +165,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCredits" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCity" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCredits" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -241,7 +241,7 @@
             <Property name="text" type="java.lang.String" value="Credits:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCity">
+        <Component class="javax.swing.JTextField" name="txtCredits">
         </Component>
         <Component class="javax.swing.JLabel" name="lblDesc">
           <Properties>
@@ -264,7 +264,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="txtDesc">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
