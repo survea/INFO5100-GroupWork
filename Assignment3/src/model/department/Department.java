@@ -23,101 +23,104 @@ import model.person.StudentDirectory;
  * @author Hp
  */
 public class Department {
-
+    
     private String departmentName;
     private CourseCatalog courseList;
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     AlumniDirectory alumniDirectory;
     public List<Employer> employerList;
-
-    public Department() {
+    
+    public Department(String deptName) {
+        departmentName = deptName;
         courseList = new CourseCatalog(this);
         employerList = new ArrayList<>();
         alumniDirectory = new AlumniDirectory(this);
         studentdirectory = new StudentDirectory(this);
         facultydirectory = new FacultyDirectory(this);
     }
-
+    
     public String getDepartmentName() {
         return departmentName;
     }
-
+    
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
-
+    
     public CourseCatalog getCourseList() {
         return courseList;
     }
-
+    
     public void setCourseList(CourseCatalog courseList) {
         this.courseList = courseList;
     }
-
+    
     public StudentDirectory getStudentdirectory() {
         return studentdirectory;
     }
-
+    
     public void setStudentdirectory(StudentDirectory studentdirectory) {
         this.studentdirectory = studentdirectory;
     }
-
+    
     public FacultyDirectory getFacultydirectory() {
         return facultydirectory;
     }
-
+    
     public void setFacultydirectory(FacultyDirectory facultydirectory) {
         this.facultydirectory = facultydirectory;
     }
-
+    
     public List<Employer> getEmployerList() {
         return employerList;
     }
-
+    
     public void setEmployerList(List<Employer> employerList) {
         this.employerList = employerList;
     }
-
+    
     public AlumniDirectory getAlumniDirectory() {
         return alumniDirectory;
     }
-
+    
     public void setAlumniDirectory(AlumniDirectory alumniDirectory) {
         this.alumniDirectory = alumniDirectory;
     }
-
+    
     public CourseCatalog addCourse(Course course) {
         courseList.addCourse(course);
         return courseList;
     }
-
+    
     public List<Employer> addEmployer(Employer employer) {
         employerList.add(employer);
         return employerList;
     }
-
+    
     public AlumniDirectory addAlumni(Alumni alumni) {
         alumniDirectory.addAlumni(alumni);
         return alumniDirectory;
     }
-
+    
     public StudentDirectory addStudent(Student student) {
         studentdirectory.addStudent(student);
         return studentdirectory;
     }
-
+    
     public FacultyDirectory addFaculty(Faculty faculty) {
         facultydirectory.newFacultyProfile(faculty);
         return facultydirectory;
     }
-
+    
     public void calculateCourseRatingPercent() {
         int courseAlumniCount = 0;
         for (Course course : courseList.getCourseList()) {
             for (Alumni alumni : alumniDirectory.getAlumniDir()) {
-                if (alumni.getCourseCatalog().getCourseList().contains(course)) {
+                List<Course> calculculatedCourses = new ArrayList<>();
+                if (alumni.getCourseCatalog().getCourseList().contains(course) && !calculculatedCourses.contains(course)) {
 //                    courseAlumniCount++;
+                    calculculatedCourses.add(course);
                     course.setCourseRating(course.getCourseRating() + 1);
                     if (alumni.getSalary() > 0 && alumni.getSalary() <= 50000) {
                         course.setCourseRating(course.getCourseRating() + 0.3);
@@ -133,7 +136,9 @@ public class Department {
             }
             for (Employer employer : employerList) {
                 for (String inDemandCourseContent : employer.getEmploymentCourses()) {
-                    if (course.getCourseContentList().contains(inDemandCourseContent)) {
+                    List<String> calculculatedContent = new ArrayList<>();
+                    if (course.getCourseContentList().contains(inDemandCourseContent) && !calculculatedContent.contains(inDemandCourseContent)) {
+                        calculculatedContent.add(inDemandCourseContent);
                         course.setCourseRating(course.getCourseRating() + 1);
                         break;
                     }
@@ -143,7 +148,7 @@ public class Department {
             course.setRatingPercent(calcCourseRating);
         }
     }
-
+    
     public double calculateDeptCoursesRating() {
         double courseRankingSum = 0;
         for (Course course : courseList.getCourseList()) {
@@ -151,10 +156,10 @@ public class Department {
         }
         return (courseRankingSum / courseList.getCourseList().size());
     }
-
+    
     @Override
     public String toString() {
         return departmentName;
     }
-
+    
 }

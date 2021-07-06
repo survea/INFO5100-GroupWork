@@ -485,6 +485,10 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private void cmbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartmentActionPerformed
         // TODO add your handling code here:
         populateCourseTable();
+        populateAlumniTable();
+        populateEmployerTable();
+        populateFacultyTable();
+        populateStudentsTable();
         Formatter dobleFormatter = new Formatter();
         dobleFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptCoursesRating());
         txtDeptCourseRating.setText(String.valueOf(dobleFormatter) + "%");
