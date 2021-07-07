@@ -80,9 +80,9 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtDeptCourseRating = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txtDeptFacultyRating = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtDeptEmploymentRating = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(253, 252, 251));
 
@@ -395,17 +395,17 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(103, 130, 167));
         jLabel3.setText("Faculty Ranking:");
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(211, 64, 71));
-        jLabel4.setText("98.0%");
+        txtDeptFacultyRating.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        txtDeptFacultyRating.setForeground(new java.awt.Color(211, 64, 71));
+        txtDeptFacultyRating.setText("98.0%");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(103, 130, 167));
         jLabel5.setText("Employment Ranking(Placement):");
 
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(211, 64, 71));
-        jLabel6.setText("98.0%");
+        txtDeptEmploymentRating.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        txtDeptEmploymentRating.setForeground(new java.awt.Color(211, 64, 71));
+        txtDeptEmploymentRating.setText("98.0%");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -430,14 +430,14 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6))
+                                        .addComponent(txtDeptEmploymentRating))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel1)
                                             .addComponent(jLabel3))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
+                                            .addComponent(txtDeptFacultyRating)
                                             .addComponent(txtDeptCourseRating)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblRole1)
@@ -468,11 +468,11 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(txtDeptFacultyRating))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)))
+                            .addComponent(txtDeptEmploymentRating)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,8 +488,18 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         populateFacultyTable();
         populateStudentsTable();
         Formatter dobleFormatter = new Formatter();
+        Formatter facultyRatingFormatter = new Formatter();
+        Formatter employmentRatingFormatter = new Formatter();
         dobleFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptCoursesRating());
         txtDeptCourseRating.setText(String.valueOf(dobleFormatter) + "%");
+        
+        facultyRatingFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptFacultyRating());
+        txtDeptFacultyRating.setText(String.valueOf(facultyRatingFormatter) + "/5");
+        
+        employmentRatingFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptEmploymentRating());
+        txtDeptEmploymentRating.setText(String.valueOf(employmentRatingFormatter) + "%");
+
+
     }//GEN-LAST:event_cmbDepartmentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -571,9 +581,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<Object> cmbDepartment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -591,6 +599,8 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblFaculty;
     private javax.swing.JTable tblStudent;
     private javax.swing.JLabel txtDeptCourseRating;
+    private javax.swing.JLabel txtDeptEmploymentRating;
+    private javax.swing.JLabel txtDeptFacultyRating;
     // End of variables declaration//GEN-END:variables
 
     private void populateCourseTable() {

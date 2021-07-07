@@ -6,6 +6,8 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.course.Course;
@@ -355,6 +357,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
         // TODO add your handling code here:
+
         AlumniFeedbackJPanel aluminiFeedback = new AlumniFeedbackJPanel(mainWorkArea,university,alumni,department, view);
         mainWorkArea.add("AlumniFeedbackJPanel", aluminiFeedback);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
@@ -394,27 +397,23 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void poplulateEmpHistory() {
         // WE NEED TO UPDATE HERE FOR EMP HISTORY
-//        try {
-//            DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
-//            model.setRowCount(0);
-//            for (EmploymentHistory e : alumni.getEmploymentHistory() ) {
-//                StringBuffer sb = new StringBuffer();
-//
-//                for (Employment emp : e.getEmploymentList()) {
-//                    String courseNameString = sb.toString();
-//                Object row[] = new Object[6];
-//                row[0] = String.valueOf(alumni.getFirstName() + " " + alumni.getLastName());
-//                row[1] = courseNameString;
-//                row[2] = String.valueOf(alumni.getGpa());
-//                row[3] = alumni.getEmployer();
-//                row[4] = String.valueOf(alumni.getSalary());
-//                row[5] = String.valueOf(alumni.getEmploymentRatingPercent());
-//                model.addRow(row);
-//                }
-//                
-//            }
-//        } catch (Exception e) {
-//
-//        }
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+            model.setRowCount(0);
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            alumni.getEmploymentHistory().stream().map(employment -> {
+                Object row[] = new Object[6];
+                row[0] = employment.getEmployerName();
+                row[1] = employment.getPostion();
+                row[2] = dateFormat.format(employment.getJoiningDate());
+                row[3] = dateFormat.format(employment.getResignationDate());
+                row[4] = String.valueOf(employment.getSalary());
+                return row;
+            }).forEachOrdered(row -> {
+                model.addRow(row);
+            });
+        } catch (Exception e) {
+
+        }
     }
 }

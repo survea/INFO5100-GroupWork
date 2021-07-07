@@ -52,7 +52,7 @@
               <Component id="btnBack" min="-2" pref="29" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Component id="addjPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="70" max="32767" attributes="0"/>
+              <EmptySpace pref="74" max="32767" attributes="0"/>
               <Component id="btnSubmit" min="-2" pref="29" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
           </Group>
@@ -125,11 +125,11 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtDOR" alignment="0" pref="262" max="32767" attributes="0"/>
-                      <Component id="txtDOJ" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtPosition" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtEmployer" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtSalary" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtDOJ" max="32767" attributes="0"/>
+                      <Component id="txtDOR" alignment="0" pref="262" max="32767" attributes="0"/>
+                      <Component id="cmbPosition" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
               </Group>
@@ -146,17 +146,17 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCourseName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPosition" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbPosition" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblkeywords" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDOJ" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblkeywords" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDOJ" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblCredits" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDOR" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblCredits" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDOR" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -202,8 +202,6 @@
             <Property name="text" type="java.lang.String" value="Position:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPosition">
-        </Component>
         <Component class="javax.swing.JLabel" name="lblkeywords">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -232,8 +230,6 @@
             <Property name="text" type="java.lang.String" value="Date of Resignation:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDOR">
-        </Component>
         <Component class="javax.swing.JLabel" name="lblDesc">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -246,9 +242,26 @@
             <Property name="text" type="java.lang.String" value="Salary:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDOJ">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtSalary">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="txtDOJ">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="txtDOR">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbPosition">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

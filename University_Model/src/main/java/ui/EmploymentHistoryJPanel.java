@@ -9,6 +9,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import model.department.Department;
 import model.person.Alumni;
+import model.person.alumniEmployment.EmploymentHistory;
 import model.university.University;
 
 /**
@@ -32,6 +33,7 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
         this.alumni = alumni;
         this.department =department;
         this.view = view;
+        populatePositionCombo();
     }
 
     /**
@@ -49,13 +51,13 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
         lblCourseCode = new javax.swing.JLabel();
         txtEmployer = new javax.swing.JTextField();
         lblCourseName = new javax.swing.JLabel();
-        txtPosition = new javax.swing.JTextField();
         lblkeywords = new javax.swing.JLabel();
         lblCredits = new javax.swing.JLabel();
-        txtDOR = new javax.swing.JTextField();
         lblDesc = new javax.swing.JLabel();
-        txtDOJ = new javax.swing.JTextField();
         txtSalary = new javax.swing.JTextField();
+        txtDOJ = new com.toedter.calendar.JDateChooser();
+        txtDOR = new com.toedter.calendar.JDateChooser();
+        cmbPosition = new javax.swing.JComboBox<>();
         btnSubmit = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(254, 254, 254));
@@ -109,6 +111,8 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
         lblDesc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDesc.setText("Salary:");
 
+        cmbPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout addjPanel3Layout = new javax.swing.GroupLayout(addjPanel3);
         addjPanel3.setLayout(addjPanel3Layout);
         addjPanel3Layout.setHorizontalGroup(
@@ -123,11 +127,11 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
                     .addComponent(lblCourseCode))
                 .addGap(18, 18, 18)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDOR, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                    .addComponent(txtDOJ)
-                    .addComponent(txtPosition)
                     .addComponent(txtEmployer)
-                    .addComponent(txtSalary))
+                    .addComponent(txtSalary)
+                    .addComponent(txtDOJ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDOR, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                    .addComponent(cmbPosition, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(204, 204, 204))
         );
         addjPanel3Layout.setVerticalGroup(
@@ -140,13 +144,13 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCourseName)
-                    .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblkeywords)
                     .addComponent(txtDOJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCredits)
                     .addComponent(txtDOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,7 +199,7 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
@@ -207,6 +211,13 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        EmploymentHistory employmentHis = new EmploymentHistory();
+        employmentHis.setEmployerName(txtEmployer.getText());
+        employmentHis.setPostion(cmbPosition.getSelectedItem().toString());
+        employmentHis.setJoiningDate(txtDOJ.getDate());
+        employmentHis.setResignationDate(txtDOR.getDate());
+        employmentHis.setSalary(Double.parseDouble(txtSalary.getText()));
+        alumni.addEmploymentHistory(employmentHis);
         backMethod();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
@@ -219,16 +230,16 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel addjPanel3;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox<String> cmbPosition;
     private javax.swing.JLabel lblCourseCode;
     private javax.swing.JLabel lblCourseName;
     private javax.swing.JLabel lblCredits;
     private javax.swing.JLabel lblDesc;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblkeywords;
-    private javax.swing.JTextField txtDOJ;
-    private javax.swing.JTextField txtDOR;
+    private com.toedter.calendar.JDateChooser txtDOJ;
+    private com.toedter.calendar.JDateChooser txtDOR;
     private javax.swing.JTextField txtEmployer;
-    private javax.swing.JTextField txtPosition;
     private javax.swing.JTextField txtSalary;
     // End of variables declaration//GEN-END:variables
 
@@ -237,5 +248,19 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
        mainWorkArea.add("AlumniJPanel", alumniJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
+    }
+
+    private void populatePositionCombo() {
+        String[] alumniJobPostions = {
+        "Associate",
+        "Senior",
+        "Lead",
+        "Manager",
+        "Higher"
+    };
+        cmbPosition.removeAllItems();
+        for (String position :alumniJobPostions) {
+            cmbPosition.addItem(position);
+        }
     }
 }
