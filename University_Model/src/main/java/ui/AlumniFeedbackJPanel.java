@@ -27,12 +27,14 @@ public class AlumniFeedbackJPanel extends javax.swing.JPanel {
     University university;
     Alumni alumni;
     Department department;
-    public AlumniFeedbackJPanel(JPanel mainWorkArea,University university,Alumni alumni,Department department) {
+    String view;
+    public AlumniFeedbackJPanel(JPanel mainWorkArea,University university,Alumni alumni,Department department,String view) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
         this.university =university;
         this.alumni= alumni;
         this.department = department;
+        this.view = view;
         populateCourse();
         populateFacultyFeedback();
     }
@@ -187,7 +189,7 @@ public class AlumniFeedbackJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
      private void backMethod() {
-        AlumniJPanel alumniJPanel = new AlumniJPanel(mainWorkArea,university,alumni,department);
+        AlumniJPanel alumniJPanel = new AlumniJPanel(mainWorkArea,university,alumni,department,view);
        mainWorkArea.add("AlumniJPanel", alumniJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);

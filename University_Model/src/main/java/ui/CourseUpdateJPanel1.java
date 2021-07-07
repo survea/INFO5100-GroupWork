@@ -237,7 +237,7 @@ public class CourseUpdateJPanel1 extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnSubmitActionPerformed
 private void backMethod() {
-        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea,university);
+        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea,university,"admin");
        mainWorkArea.add("DepartmentJPanel", courseJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
