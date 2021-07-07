@@ -5,24 +5,64 @@
  */
 package model.person.alumniEmployment;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  *
  * @author Hp
  */
 public class EmploymentHistory {
-    private List<Employment> employmentList;
+//    private List<Employment> employmentList;
+
+    private String employerName;
+    private String postion;
+    private Date joiningDate;
+    private Date resignationDate;
+    private double salary;
 
     public EmploymentHistory() {
     }
 
-    public List<Employment> getEmploymentList() {
-        return employmentList;
+    public String getEmployerName() {
+        return employerName;
     }
 
-    public void setEmploymentList(List<Employment> employmentList) {
-        this.employmentList = employmentList;
+    public void setEmployerName(String employerName) {
+        this.employerName = employerName;
+    }
+
+    public String getPostion() {
+        return postion;
+    }
+
+    public void setPostion(String postion) {
+        this.postion = postion;
+    }
+
+    public Date getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(Date joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+    public Date getResignationDate() {
+        return resignationDate;
+    }
+
+    public void setResignationDate(Date resignationDate) {
+        this.resignationDate = resignationDate;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
     
+
+
 }

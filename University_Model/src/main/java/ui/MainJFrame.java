@@ -17,6 +17,7 @@ import model.person.Faculty;
 import model.person.PersonDirectory;
 import model.person.Student;
 import model.person.StudentDirectory;
+import model.person.alumniEmployment.EmploymentHistory;
 import model.university.University;
 import model.university.UniversityDirectory;
 
@@ -247,7 +248,7 @@ public class MainJFrame extends javax.swing.JFrame {
         for (int studCount = 0; studCount < 50; studCount++) {
             //        Student studentDetails = new Student(faker.number().randomDouble(2, 0, 4), faker.number().randomDigitNotZero(), faker.name().firstName(), faker.name().lastName(), faker.number().randomDigitNotZero());
             Student studentDetails = new Student();
-            studentDetails.setGpa(faker.number().randomDouble(2, 0, 4));
+            studentDetails.setGpa(faker.number().randomDouble(2, 3, 4));
             studentDetails.setId(faker.number().randomDigitNotZero());
             studentDetails.setFirstName(faker.name().firstName());
             studentDetails.setLastName(faker.name().lastName());
@@ -342,12 +343,21 @@ public class MainJFrame extends javax.swing.JFrame {
             alumniDetails.setFirstName(faker.name().firstName());
             alumniDetails.setLastName(faker.name().lastName());
             alumniDetails.setAge(faker.number().randomDigitNotZero());
-            alumniDetails.setSalary(faker.number().randomDouble(2, 10000, 190000));
-            alumniDetails.setJobPostion(alumniJobPostions[rand.nextInt(alumniJobPostions.length)]);
-            alumniDetails.setEmployer(faker.company().name());
+
             for (int i = 0; i < 2; i++) {
                 alumniDetails.addCourse(dept.getCourseList().getCourseList().get(rand.nextInt(dept.getCourseList().getCourseList().size())));
+                EmploymentHistory empHistory = new EmploymentHistory();
+                empHistory.setEmployerName(faker.company().name());
+                empHistory.setJoiningDate(faker.date().birthday());
+                empHistory.setResignationDate(faker.date().birthday());
+                empHistory.setPostion(alumniJobPostions[rand.nextInt(alumniJobPostions.length)]);
+                empHistory.setSalary(faker.number().randomDouble(2, 10000, 190000));
+
+                alumniDetails.addEmploymentHistory(empHistory);
             }
+            alumniDetails.setSalary(alumniDetails.getEmploymentHistory().get(alumniDetails.getEmploymentHistory().size() - 1).getSalary());
+            alumniDetails.setJobPostion(alumniDetails.getEmploymentHistory().get(alumniDetails.getEmploymentHistory().size() - 1).getPostion());
+            alumniDetails.setEmployer(alumniDetails.getEmploymentHistory().get(alumniDetails.getEmploymentHistory().size() - 1).getEmployerName());
             alumniDetails.calcEmploymentRating();
             dept.addAlumni(alumniDetails);
 

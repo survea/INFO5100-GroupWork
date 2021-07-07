@@ -6,6 +6,8 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.course.Course;
@@ -24,21 +26,22 @@ public class AlumniJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AlumniJPanel
      */
-   JPanel mainWorkArea;
-   University university;
-   Alumni alumni;
-   Department department;
-    public AlumniJPanel( JPanel mainWorkArea,University university, Alumni alumni,Department department) {
+    JPanel mainWorkArea;
+    University university;
+    Alumni alumni;
+    Department department;
+
+    public AlumniJPanel(JPanel mainWorkArea, University university, Alumni alumni, Department department) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
-        this.university= university;
-        this. alumni =alumni;
-        this.department =department;
+        this.university = university;
+        this.alumni = alumni;
+        this.department = department;
         txtStudentID.setText(String.valueOf(alumni.getId()));
         txtName.setText(String.valueOf(alumni.getFirstName() + " " + alumni.getLastName()));
         txtCourses.setText(String.valueOf(alumni.getCourseCatalog()));
         txtGpa.setText(String.valueOf(alumni.getGpa()));
-        
+
         poplulateEmpHistory();
     }
 
@@ -327,7 +330,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void btnAddAlumniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAlumniActionPerformed
         // TODO add your handling code here:
-        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea,university,alumni,department);
+        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea, university, alumni, department);
         mainWorkArea.add("AluminiJPanel", aluminiJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
@@ -335,7 +338,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
         // TODO add your handling code here:
-        AlumniFeedbackJPanel aluminiFeedback = new AlumniFeedbackJPanel(mainWorkArea,university,alumni,department);
+        AlumniFeedbackJPanel aluminiFeedback = new AlumniFeedbackJPanel(mainWorkArea, university, alumni, department);
         mainWorkArea.add("AlumniFeedbackJPanel", aluminiFeedback);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
@@ -343,10 +346,10 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void backMethod() {
         DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea, university);
-       mainWorkArea.add("DepartmentJPanel", courseJPanel);
-       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-       layout.next(mainWorkArea);
-         }
+        mainWorkArea.add("DepartmentJPanel", courseJPanel);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addjPanel3;
     private javax.swing.JPanel addjPanel4;
@@ -370,27 +373,23 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void poplulateEmpHistory() {
         // WE NEED TO UPDATE HERE FOR EMP HISTORY
-//        try {
-//            DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
-//            model.setRowCount(0);
-//            for (EmploymentHistory e : alumni.getEmploymentHistory() ) {
-//                StringBuffer sb = new StringBuffer();
-//
-//                for (Employment emp : e.getEmploymentList()) {
-//                    String courseNameString = sb.toString();
-//                Object row[] = new Object[6];
-//                row[0] = String.valueOf(alumni.getFirstName() + " " + alumni.getLastName());
-//                row[1] = courseNameString;
-//                row[2] = String.valueOf(alumni.getGpa());
-//                row[3] = alumni.getEmployer();
-//                row[4] = String.valueOf(alumni.getSalary());
-//                row[5] = String.valueOf(alumni.getEmploymentRatingPercent());
-//                model.addRow(row);
-//                }
-//                
-//            }
-//        } catch (Exception e) {
-//
-//        }
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+            model.setRowCount(0);
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            alumni.getEmploymentHistory().stream().map(employment -> {
+                Object row[] = new Object[6];
+                row[0] = employment.getEmployerName();
+                row[1] = employment.getPostion();
+                row[2] = dateFormat.format(employment.getJoiningDate());
+                row[3] = dateFormat.format(employment.getResignationDate());
+                row[4] = String.valueOf(employment.getSalary());
+                return row;
+            }).forEachOrdered(row -> {
+                model.addRow(row);
+            });
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -157,6 +157,22 @@ public class Department {
         return (courseRankingSum / courseList.getCourseList().size());
     }
     
+    public double calculateDeptFacultyRating() {
+        double facultyRatingSum = 0;
+        for (Faculty faculty : facultydirectory.getFacultyList()) {
+            facultyRatingSum = facultyRatingSum + faculty.getRating();
+        }
+        return (facultyRatingSum / facultydirectory.getFacultyList().size());
+    }
+    
+    public double calculateDeptEmploymentRating() {
+        double employmentRatingSum = 0;
+        for (Alumni alumni : alumniDirectory.getAlumniDir()) {
+            employmentRatingSum = employmentRatingSum + alumni.getEmploymentRatingPercent();
+        }
+        return (employmentRatingSum / alumniDirectory.getAlumniDir().size());
+    }
+    
     @Override
     public String toString() {
         return departmentName;
