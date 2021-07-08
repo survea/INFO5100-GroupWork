@@ -12,7 +12,6 @@ import java.util.Date;
  * @author Hp
  */
 public class EmploymentHistory {
-//    private List<Employment> employmentList;
 
     private String employerName;
     private String postion;

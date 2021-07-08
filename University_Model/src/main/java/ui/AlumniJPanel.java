@@ -10,11 +10,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.course.Course;
 import model.department.Department;
 import model.person.Alumni;
-import model.person.alumniEmployment.Employment;
-import model.person.alumniEmployment.EmploymentHistory;
 import model.university.University;
 
 /**

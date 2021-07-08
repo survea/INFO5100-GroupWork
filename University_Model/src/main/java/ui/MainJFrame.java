@@ -268,8 +268,8 @@ public class MainJFrame extends javax.swing.JFrame {
             facultyDetails.setFirstName(faker.name().firstName());
             facultyDetails.setLastName(faker.name().lastName());
             facultyDetails.setAge(faker.number().randomDigitNotZero());
-            for (int i = 0; i < 5; i++) {
-                facultyDetails.addNewRating(rand.nextInt(5));
+            for (int i = 1; i <= 5; i++) {
+                facultyDetails.addNewRating(faker.number().numberBetween(2, 5));
             }
             for (int i = 0; i < 3; i++) {
                 facultyDetails.addNewCourse(dept.getCourseList().getCourseList().get(rand.nextInt(dept.getCourseList().getCourseList().size())));
