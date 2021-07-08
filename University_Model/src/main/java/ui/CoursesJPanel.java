@@ -235,7 +235,7 @@ public class CoursesJPanel extends javax.swing.JPanel {
             key.add(keyword);
             course.setCourseContentList(key);
             department.getCourseList().addCourse(course);
-            JOptionPane.showMessageDialog(this, "Updated Course Information","Success",JOptionPane.INFORMATION_MESSAGE);  
+            JOptionPane.showMessageDialog(this, "Added New Course Information","Success",JOptionPane.INFORMATION_MESSAGE);  
             backMethod();
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

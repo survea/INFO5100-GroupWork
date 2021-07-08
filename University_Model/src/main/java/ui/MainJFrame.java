@@ -214,7 +214,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void setLoginScreen() {
 
-        LoginScreen loginScreen = new LoginScreen(mainWorkArea, univDir);
+        LoginScreen loginScreen = new LoginScreen(mainWorkArea);
         mainWorkArea.add("LoginScreen", loginScreen);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);

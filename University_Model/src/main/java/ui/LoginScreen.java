@@ -22,14 +22,7 @@ public class LoginScreen extends javax.swing.JPanel {
     JPanel mainWorkArea;
     public LoginScreen(JPanel mainWorkArea) {
         initComponents();
-        populateUniversityCombo();
-    }
-    UniversityDirectory universityDirectory;
-
-    LoginScreen(JPanel mainWorkArea, UniversityDirectory universityDirectory) {
-        initComponents();
         this.mainWorkArea = mainWorkArea;
-        this.universityDirectory = universityDirectory;
         populateUniversityCombo();
     }
 
