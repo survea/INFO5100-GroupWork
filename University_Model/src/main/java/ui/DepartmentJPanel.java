@@ -17,6 +17,7 @@ import model.person.Alumni;
 import model.person.Faculty;
 import model.person.Student;
 import model.university.University;
+import model.university.UniversityDirectory;
 
 /**
  *
@@ -39,6 +40,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         this.view = view;
         
         lblTitle.setText(university.getUniversityName());
+        lblUniversityRank.setText(String.valueOf(UniversityDirectory.getUniversityList().indexOf(university) + 1));
         populateDepartmentCombo();
     }
 
@@ -74,7 +76,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblFaculty = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        lblRole3 = new javax.swing.JLabel();
+        lblUniversityRank = new javax.swing.JLabel();
         lblRole4 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -339,10 +341,10 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblRole3.setBackground(new java.awt.Color(254, 254, 254));
-        lblRole3.setFont(new java.awt.Font("Ubuntu", 1, 60)); // NOI18N
-        lblRole3.setForeground(new java.awt.Color(232, 54, 39));
-        lblRole3.setText("2");
+        lblUniversityRank.setBackground(new java.awt.Color(254, 254, 254));
+        lblUniversityRank.setFont(new java.awt.Font("Ubuntu", 1, 60)); // NOI18N
+        lblUniversityRank.setForeground(new java.awt.Color(232, 54, 39));
+        lblUniversityRank.setText("2");
 
         lblRole4.setBackground(new java.awt.Color(254, 254, 254));
         lblRole4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -355,7 +357,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRole3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUniversityRank, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -366,7 +368,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRole3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUniversityRank, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblRole4)
                 .addGap(24, 24, 24))
@@ -590,9 +592,9 @@ public class DepartmentJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblRole1;
-    private javax.swing.JLabel lblRole3;
     private javax.swing.JLabel lblRole4;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUniversityRank;
     private javax.swing.JTable tblAlumni;
     private javax.swing.JTable tblCourse;
     private javax.swing.JTable tblEmployee;

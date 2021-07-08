@@ -6,6 +6,8 @@
 package model.university;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -32,4 +34,9 @@ public class UniversityDirectory {
         universityList.add(university);
         return universityList;
     }
+    public static void sortUniversities(Comparator<University> c) {
+		// TODO Auto-generated method stub
+		      Collections.sort(universityList, c);
+		universityList.forEach(System.out::println);
+	}
 }

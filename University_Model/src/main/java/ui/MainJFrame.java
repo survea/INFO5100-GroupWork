@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import model.course.Course;
@@ -113,36 +114,33 @@ public class MainJFrame extends javax.swing.JFrame {
         University northeastern = new University();
         List<String> csvCourseList = new ArrayList<>(Arrays.asList(newCourseList));
         northeastern.setUniversityName("Northeastern University");
-        for (String department : departmentNames) {
-            northeastern.addDepartment(new Department(department));
-        }
-        for (Department dept : northeastern.getDepartmentList()) {
-
-            addDepartmentCourses(dept, csvCourseList);
-            addDepartmentStudents(dept, newStudents);
-            addDepartmentFaculty(dept, facultyData);
-            addDepartmentEmployers(dept, employeeList, empCourses);
-            addDepartmentAlumni(dept, alumniStudents, alumniJobPostions);
-
-//        northeastern.addDepartment(dept);
-//        UniversityDirectory.addUniversity(northeastern);
-        }
-
-//        Department infoSys = northeastern.getDepartmentList().get(0);
-//        addDepartmentCourses(infoSys, csvCourseList);
-//        addDepartmentStudents(infoSys, newStudents);
-//        addDepartmentFaculty(infoSys, facultyData);
-//        addDepartmentEmployers(infoSys, employeeList, empCourses);
-//        addDepartmentAlumni(infoSys, alumniStudents, alumniJobPostions);
-//        northeastern.addDepartment(infoSys);
+        University bostonUni = new University();
+        bostonUni.setUniversityName("Boston University");
         UniversityDirectory.addUniversity(northeastern);
+        UniversityDirectory.addUniversity(bostonUni);
+        for (University uni : UniversityDirectory.getUniversityList()) {
+
+            for (String department : departmentNames) {
+                uni.addDepartment(new Department(department));
+            }
+            for (Department dept : uni.getDepartmentList()) {
+
+                addDepartmentCourses(dept, csvCourseList);
+                addDepartmentStudents(dept, newStudents);
+                addDepartmentFaculty(dept, facultyData);
+                addDepartmentEmployers(dept, employeeList, empCourses);
+                addDepartmentAlumni(dept, alumniStudents, alumniJobPostions);
+
+            }
+            calculateRating(uni);
+            uni.calculateUniversityRating();
+
+            PersonDirectory.getPersonDir().forEach(System.out::println);
+            EmployerDirectory.employerList.forEach(System.out::println);
+        }
+        UniversityDirectory.sortUniversities(Comparator.comparing(University::getUniversityName));
         UniversityDirectory.getUniversityList().forEach(System.out::println);
 
-        calculateRating();
-
-        PersonDirectory.getPersonDir().forEach(System.out::println);
-//        courseCatalog.getCourseList().forEach(System.out::println);
-        EmployerDirectory.employerList.forEach(System.out::println);
         setLoginScreen();
 
     }
@@ -365,10 +363,8 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }
 
-    private void calculateRating() {
-        Department infosysDept = UniversityDirectory.getUniversityList().get(0).getDepartmentList().get(0);
-
-        UniversityDirectory.getUniversityList().get(0).getDepartmentList().forEach(dept -> {
+    private void calculateRating(University university) {
+        university.getDepartmentList().forEach(dept -> {
             dept.calculateCourseRatingPercent();
             dept.getCourseList().getCourseList().forEach(System.out::println);
 

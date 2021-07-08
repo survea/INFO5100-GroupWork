@@ -17,6 +17,7 @@ public class University {
 
     private String universityName;
     private List<Department> departmentList;
+    private double universityRating;
 
     public University() {
         departmentList = new ArrayList<>();
@@ -50,6 +51,34 @@ public class University {
         }
         return (uniCourseRankingSum / departmentList.size());
     }
+
+    public double getUniversityRating() {
+        return universityRating;
+    }
+
+    public void setUniversityRating(double universityRating) {
+        this.universityRating = universityRating;
+    }
+    
+    public double calculateUniversityRating() {
+        double totalCoursesRating = 0;
+        double totalAlumniRating = 0;
+        double totalFacultyRating = 0;
+        
+        for(Department dept : getDepartmentList()) {
+            totalCoursesRating = totalCoursesRating + dept.calculateDeptCoursesRating();
+            totalAlumniRating = totalAlumniRating + dept.calculateDeptEmploymentRating();
+            totalFacultyRating = totalFacultyRating + dept.calculateDeptFacultyRating();
+        }
+        totalCoursesRating = totalCoursesRating/getDepartmentList().size();
+        totalAlumniRating = totalAlumniRating/getDepartmentList().size();
+        totalFacultyRating = totalFacultyRating/getDepartmentList().size();
+        
+        universityRating = (totalCoursesRating + totalAlumniRating + totalFacultyRating)/3;
+        setUniversityRating(universityRating);
+        return universityRating;
+    }
+    
 
     @Override
     public String toString() {
