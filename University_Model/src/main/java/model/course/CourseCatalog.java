@@ -27,7 +27,7 @@ public class CourseCatalog {
     }
 
     public void setCourseList(List<Course> courseList) {
-        courseList = courseList;
+        this.courseList = courseList;
     }
     
     public void addCourse(Course course) {
