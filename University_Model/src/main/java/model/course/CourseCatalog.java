@@ -30,9 +30,8 @@ public class CourseCatalog {
         courseList = courseList;
     }
     
-    public List<Course> addCourse(Course course) {
+    public void addCourse(Course course) {
         courseList.add(course);
-        return courseList;
     };
 
     @Override

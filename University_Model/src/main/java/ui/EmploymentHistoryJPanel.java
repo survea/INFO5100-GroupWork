@@ -25,12 +25,14 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
     University university;
     Alumni alumni;
     Department department;
-    public EmploymentHistoryJPanel(JPanel mainWorkArea,University university,Alumni alumni,Department department) {
+    String view;
+    public EmploymentHistoryJPanel(JPanel mainWorkArea,University university,Alumni alumni,Department department,String view) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
         this.university =university;
         this.alumni = alumni;
         this.department =department;
+        this.view = view;
         populatePositionCombo();
     }
 
@@ -242,7 +244,7 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void backMethod() {
-        AlumniJPanel alumniJPanel = new AlumniJPanel(mainWorkArea,university,alumni,department);
+        AlumniJPanel alumniJPanel = new AlumniJPanel(mainWorkArea,university,alumni,department,view);
        mainWorkArea.add("AlumniJPanel", alumniJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);

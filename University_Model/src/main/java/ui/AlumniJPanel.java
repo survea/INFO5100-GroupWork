@@ -23,22 +23,35 @@ public class AlumniJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AlumniJPanel
      */
-    JPanel mainWorkArea;
-    University university;
-    Alumni alumni;
-    Department department;
-
-    public AlumniJPanel(JPanel mainWorkArea, University university, Alumni alumni, Department department) {
+   JPanel mainWorkArea;
+   University university;
+   Alumni alumni;
+   Department department;
+   String view;
+    public AlumniJPanel( JPanel mainWorkArea,University university, Alumni alumni,Department department, String view) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
-        this.university = university;
-        this.alumni = alumni;
-        this.department = department;
+        this.university= university;
+        this. alumni =alumni;
+        this.department =department;
+        this.view = view;
+        
+        if(view.equals("student")){
+            btnAddAlumni.setEnabled(false);
+            btnSubmit.setEnabled(false);
+        }
         txtStudentID.setText(String.valueOf(alumni.getId()));
         txtName.setText(String.valueOf(alumni.getFirstName() + " " + alumni.getLastName()));
-        txtCourses.setText(String.valueOf(alumni.getCourseCatalog()));
         txtGpa.setText(String.valueOf(alumni.getGpa()));
-
+        StringBuilder sb = new StringBuilder();
+        alumni.getCourseCatalog().getCourseList().stream().map(course -> {
+            sb.append(course.getCourseCode());
+           return course;
+       }).forEachOrdered(_item -> {
+           sb.append(", ");
+       });
+        String courseNameString = sb.toString();
+        txtCourses.setText(courseNameString);
         poplulateEmpHistory();
     }
 
@@ -110,6 +123,12 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCredits.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         lblCredits.setForeground(new java.awt.Color(114, 150, 180));
         lblCredits.setText("GPA:");
+
+        txtCourses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCoursesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addjPanel3Layout = new javax.swing.GroupLayout(addjPanel3);
         addjPanel3.setLayout(addjPanel3Layout);
@@ -327,7 +346,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void btnAddAlumniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAlumniActionPerformed
         // TODO add your handling code here:
-        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea, university, alumni, department);
+        EmploymentHistoryJPanel aluminiJPanel = new EmploymentHistoryJPanel(mainWorkArea,university,alumni,department, view);
         mainWorkArea.add("AluminiJPanel", aluminiJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
@@ -335,18 +354,23 @@ public class AlumniJPanel extends javax.swing.JPanel {
 
     private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
         // TODO add your handling code here:
-        AlumniFeedbackJPanel aluminiFeedback = new AlumniFeedbackJPanel(mainWorkArea, university, alumni, department);
+
+        AlumniFeedbackJPanel aluminiFeedback = new AlumniFeedbackJPanel(mainWorkArea,university,alumni,department, view);
         mainWorkArea.add("AlumniFeedbackJPanel", aluminiFeedback);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
     }//GEN-LAST:event_btnFeedbackActionPerformed
 
+    private void txtCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCoursesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCoursesActionPerformed
+
     private void backMethod() {
-        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea, university);
-        mainWorkArea.add("DepartmentJPanel", courseJPanel);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
-    }
+        DepartmentJPanel courseJPanel = new DepartmentJPanel(mainWorkArea, university, view);
+       mainWorkArea.add("DepartmentJPanel", courseJPanel);
+       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+       layout.next(mainWorkArea);
+         }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addjPanel3;
     private javax.swing.JPanel addjPanel4;

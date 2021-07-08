@@ -163,11 +163,11 @@ public class LoginScreen extends javax.swing.JPanel {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        University selectedUni = (University) cmbUniversity.getSelectedItem();
-        DepartmentJPanel departmentJPanel = new DepartmentJPanel(mainWorkArea, selectedUni);
-        mainWorkArea.add("DepartmentJPanel", departmentJPanel);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+            University selectedUni = (University) cmbUniversity.getSelectedItem();
+            UniDepartmentJPanel departmentJPanel = new UniDepartmentJPanel(mainWorkArea, selectedUni);
+             mainWorkArea.add("UniDepartmentJPanel", departmentJPanel);
+              CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+             layout.next(mainWorkArea);
     }//GEN-LAST:event_btnLoginActionPerformed
     
 

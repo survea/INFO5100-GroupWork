@@ -144,7 +144,7 @@ public class Alumni extends Student {
 
     @Override
     public String toString() {
-        return "Alumni{" + "id " + super.getId() + ", first name " + super.getFirstName() + ", last name " + super.getLastName() + ", employer=" + employer + ", employmentHistory=" + employmentHistory + '}';
+        return  super.getFirstName() + " " + super.getLastName();
     }
 
     private double calculateEmploymentRatingPercent() {
