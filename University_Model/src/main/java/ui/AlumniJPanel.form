@@ -126,7 +126,7 @@
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="lblCredits1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txtGpa1" min="-2" pref="108" max="-2" attributes="0"/>
+                  <Component id="txtGYear" min="-2" pref="108" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -147,7 +147,7 @@
                       <Component id="txtCourses" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="3" groupAlignment="3" attributes="0">
                           <Component id="lblCredits1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtGpa1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtGYear" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtGpa" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCredits" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -255,7 +255,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCoursesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGpa1">
+        <Component class="javax.swing.JTextField" name="txtGYear">
           <Properties>
             <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1c" green="23" red="29" type="rgb"/>

@@ -42,6 +42,9 @@ public class AlumniJPanel extends javax.swing.JPanel {
         txtStudentID.setText(String.valueOf(alumni.getId()));
         txtName.setText(String.valueOf(alumni.getFirstName() + " " + alumni.getLastName()));
         txtGpa.setText(String.valueOf(alumni.getGpa()));
+        
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        txtGYear.setText(dateFormat.format(alumni.getGraduationYear()));
         StringBuilder sb = new StringBuilder();
         alumni.getCourseCatalog().getCourseList().stream().map(course -> {
             sb.append(course.getCourseCode());
@@ -73,7 +76,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCredits = new javax.swing.JLabel();
         txtGpa = new javax.swing.JTextField();
         txtCourses = new javax.swing.JTextField();
-        txtGpa1 = new javax.swing.JTextField();
+        txtGYear = new javax.swing.JTextField();
         lblCredits1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         addjPanel4 = new javax.swing.JPanel();
@@ -139,8 +142,8 @@ public class AlumniJPanel extends javax.swing.JPanel {
             }
         });
 
-        txtGpa1.setDisabledTextColor(new java.awt.Color(41, 35, 28));
-        txtGpa1.setEnabled(false);
+        txtGYear.setDisabledTextColor(new java.awt.Color(41, 35, 28));
+        txtGYear.setEnabled(false);
 
         lblCredits1.setBackground(new java.awt.Color(254, 254, 254));
         lblCredits1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -176,7 +179,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addComponent(lblCredits1)
                 .addGap(18, 18, 18)
-                .addComponent(txtGpa1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtGYear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         addjPanel3Layout.setVerticalGroup(
@@ -194,7 +197,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
                     .addComponent(txtCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblCredits1)
-                        .addComponent(txtGpa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtGpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblCredits)))
                 .addGap(46, 46, 46))
@@ -384,8 +387,8 @@ public class AlumniJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblkeywords;
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTextField txtCourses;
+    private javax.swing.JTextField txtGYear;
     private javax.swing.JTextField txtGpa;
-    private javax.swing.JTextField txtGpa1;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtStudentID;
     // End of variables declaration//GEN-END:variables
