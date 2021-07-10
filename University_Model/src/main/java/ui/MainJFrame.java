@@ -102,7 +102,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-        setSize(800, 600);
+        setSize(1000, 600);
         setResizable(false);
 
         empDir = new EmployerDirectory();

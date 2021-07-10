@@ -6,6 +6,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.department.Department;
 import model.person.Alumni;
@@ -178,17 +179,18 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGap(103, 103, 103)
+                        .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(353, 353, 353)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(398, 398, 398)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,11 +199,11 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addGap(112, 112, 112))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,14 +213,24 @@ public class EmploymentHistoryJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        EmploymentHistory employmentHis = new EmploymentHistory();
-        employmentHis.setEmployerName(txtEmployer.getText());
-        employmentHis.setPostion(cmbPosition.getSelectedItem().toString());
-        employmentHis.setJoiningDate(txtDOJ.getDate());
-        employmentHis.setResignationDate(txtDOR.getDate());
-        employmentHis.setSalary(Double.parseDouble(txtSalary.getText()));
-        alumni.addEmploymentHistory(employmentHis);
-        backMethod();
+        if(txtEmployer.getText().isEmpty() |txtSalary.getText().isEmpty()|txtDOJ.getDate() == null |txtDOR.getDate() == null ){
+            JOptionPane.showMessageDialog(null, "Please fillup all the fields","Error",JOptionPane.ERROR_MESSAGE);
+        } else {
+            int check = txtDOR.getDate().compareTo(txtDOJ.getDate());
+            if(check < 0){
+                JOptionPane.showMessageDialog(null, "Date of Resignation should be after Date of Joining","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            EmploymentHistory employmentHis = new EmploymentHistory();
+            employmentHis.setEmployerName(txtEmployer.getText());
+            employmentHis.setPostion(cmbPosition.getSelectedItem().toString());
+            employmentHis.setJoiningDate(txtDOJ.getDate());
+            employmentHis.setResignationDate(txtDOR.getDate());
+            employmentHis.setSalary(Double.parseDouble(txtSalary.getText()));
+            alumni.addEmploymentHistory(employmentHis);
+            JOptionPane.showMessageDialog(this, " Information Submitted!");
+            backMethod();
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtEmployerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployerActionPerformed

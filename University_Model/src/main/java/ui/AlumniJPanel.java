@@ -38,7 +38,6 @@ public class AlumniJPanel extends javax.swing.JPanel {
         
         if(view.equals("student")){
             btnAddAlumni.setEnabled(false);
-            btnSubmit.setEnabled(false);
         }
         txtStudentID.setText(String.valueOf(alumni.getId()));
         txtName.setText(String.valueOf(alumni.getFirstName() + " " + alumni.getLastName()));
@@ -74,7 +73,8 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCredits = new javax.swing.JLabel();
         txtGpa = new javax.swing.JTextField();
         txtCourses = new javax.swing.JTextField();
-        btnSubmit = new javax.swing.JButton();
+        txtGpa1 = new javax.swing.JTextField();
+        lblCredits1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         addjPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -97,6 +97,8 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCourseCode.setForeground(new java.awt.Color(114, 150, 180));
         lblCourseCode.setText("Student ID:");
 
+        txtStudentID.setDisabledTextColor(new java.awt.Color(41, 35, 28));
+        txtStudentID.setEnabled(false);
         txtStudentID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStudentIDActionPerformed(evt);
@@ -108,6 +110,8 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCourseName.setForeground(new java.awt.Color(114, 150, 180));
         lblCourseName.setText("Name:");
 
+        txtName.setDisabledTextColor(new java.awt.Color(41, 35, 28));
+        txtName.setEnabled(false);
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -124,43 +128,56 @@ public class AlumniJPanel extends javax.swing.JPanel {
         lblCredits.setForeground(new java.awt.Color(114, 150, 180));
         lblCredits.setText("GPA:");
 
+        txtGpa.setDisabledTextColor(new java.awt.Color(41, 35, 28));
+        txtGpa.setEnabled(false);
+
+        txtCourses.setDisabledTextColor(new java.awt.Color(41, 35, 28));
+        txtCourses.setEnabled(false);
         txtCourses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCoursesActionPerformed(evt);
             }
         });
 
+        txtGpa1.setDisabledTextColor(new java.awt.Color(41, 35, 28));
+        txtGpa1.setEnabled(false);
+
+        lblCredits1.setBackground(new java.awt.Color(254, 254, 254));
+        lblCredits1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        lblCredits1.setForeground(new java.awt.Color(114, 150, 180));
+        lblCredits1.setText("Graduate Year:");
+
         javax.swing.GroupLayout addjPanel3Layout = new javax.swing.GroupLayout(addjPanel3);
         addjPanel3.setLayout(addjPanel3Layout);
         addjPanel3Layout.setHorizontalGroup(
             addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addjPanel3Layout.createSequentialGroup()
+                .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addjPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(lblCourseCode))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addjPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblkeywords)))
+                .addGap(18, 18, 18)
+                .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtStudentID, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                    .addComponent(txtCourses))
+                .addGap(93, 93, 93)
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(addjPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblCredits)
                         .addGap(18, 18, 18)
                         .addComponent(txtGpa, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(addjPanel3Layout.createSequentialGroup()
-                        .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addjPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblCourseCode)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(addjPanel3Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(lblkeywords)
-                                .addGap(9, 9, 9)))
-                        .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtStudentID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(addjPanel3Layout.createSequentialGroup()
-                                .addComponent(txtCourses)
-                                .addGap(9, 9, 9)))
-                        .addGap(166, 166, 166)
                         .addComponent(lblCourseName)
                         .addGap(18, 18, 18)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(91, 91, 91))
+                .addGap(42, 42, 42)
+                .addComponent(lblCredits1)
+                .addGap(18, 18, 18)
+                .addComponent(txtGpa1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         addjPanel3Layout.setVerticalGroup(
             addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,21 +192,13 @@ public class AlumniJPanel extends javax.swing.JPanel {
                 .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblkeywords)
                     .addComponent(txtCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCredits)
-                    .addComponent(txtGpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addjPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCredits1)
+                        .addComponent(txtGpa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCredits)))
                 .addGap(46, 46, 46))
         );
-
-        btnSubmit.setBackground(new java.awt.Color(254, 254, 254));
-        btnSubmit.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        btnSubmit.setForeground(new java.awt.Color(100, 149, 162));
-        btnSubmit.setText("Submit");
-        btnSubmit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
-            }
-        });
 
         btnBack.setBackground(new java.awt.Color(254, 254, 254));
         btnBack.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -236,12 +245,12 @@ public class AlumniJPanel extends javax.swing.JPanel {
             .addGroup(addjPanel4Layout.createSequentialGroup()
                 .addGroup(addjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addjPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(403, 403, 403)
+                        .addComponent(btnAddAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(addjPanel4Layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(btnAddAlumni, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         addjPanel4Layout.setVerticalGroup(
             addjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,16 +281,16 @@ public class AlumniJPanel extends javax.swing.JPanel {
         addjPanel5Layout.setHorizontalGroup(
             addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addjPanel5Layout.createSequentialGroup()
-                .addGap(288, 288, 288)
+                .addGap(370, 370, 370)
                 .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addjPanel5Layout.setVerticalGroup(
             addjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addjPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addjPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -289,21 +298,16 @@ public class AlumniJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(170, 170, 170)
-                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addjPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addjPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addjPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(339, 339, 339)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addjPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addjPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addjPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,9 +325,7 @@ public class AlumniJPanel extends javax.swing.JPanel {
                 .addComponent(addjPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addjPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -334,11 +336,6 @@ public class AlumniJPanel extends javax.swing.JPanel {
     private void txtStudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStudentIDActionPerformed
-
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
-        backMethod();
-    }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
@@ -378,16 +375,17 @@ public class AlumniJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddAlumni;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnFeedback;
-    private javax.swing.JButton btnSubmit;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblCourseCode;
     private javax.swing.JLabel lblCourseName;
     private javax.swing.JLabel lblCredits;
+    private javax.swing.JLabel lblCredits1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblkeywords;
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTextField txtCourses;
     private javax.swing.JTextField txtGpa;
+    private javax.swing.JTextField txtGpa1;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtStudentID;
     // End of variables declaration//GEN-END:variables

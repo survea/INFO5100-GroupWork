@@ -17,6 +17,7 @@ import model.person.Alumni;
 import model.person.Faculty;
 import model.person.Student;
 import model.university.University;
+import model.university.UniversityDirectory;
 
 /**
  *
@@ -39,6 +40,7 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
         this.university = university;
         this.view = view;
         lblTitle.setText(university.getUniversityName());
+        lblUniversityRank.setText(String.valueOf(UniversityDirectory.getUniversityList().indexOf(university) + 1));
         if(view.equals("student")){
             lblSubtitle.setText("Student View");
         } else {
@@ -74,15 +76,15 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblFaculty = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        lblRole3 = new javax.swing.JLabel();
+        lblUniversityRank = new javax.swing.JLabel();
         lblRole4 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtDeptCourseRating = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txtDeptFacultyRating = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtDeptEmploymentRating = new javax.swing.JLabel();
         lblSubtitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(253, 252, 251));
@@ -138,8 +140,8 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
             CoursePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CoursePanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         CoursePanelLayout.setVerticalGroup(
             CoursePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,13 +157,13 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
 
         tblAlumni.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student", "Courses", "GPA", "Employer", "Salary", "EmploymentRating"
+                "Student", "Courses", "GPA", "Employer", "Salary", "EmploymentRating", "Graduate Year"
             }
         ));
         jScrollPane3.setViewportView(tblAlumni);
@@ -181,14 +183,14 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
         AlumniPanel.setLayout(AlumniPanelLayout);
         AlumniPanelLayout.setHorizontalGroup(
             AlumniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlumniPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(AlumniPanelLayout.createSequentialGroup()
                 .addGap(315, 315, 315)
                 .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(523, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlumniPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         AlumniPanelLayout.setVerticalGroup(
             AlumniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +199,7 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alumni Details", AlumniPanel);
@@ -223,8 +225,8 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
             EmpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EmpPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         EmpPanelLayout.setVerticalGroup(
             EmpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,8 +259,8 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
             FacultyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FacultyPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         FacultyPanelLayout.setVerticalGroup(
             FacultyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,10 +275,10 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblRole3.setBackground(new java.awt.Color(254, 254, 254));
-        lblRole3.setFont(new java.awt.Font("Ubuntu", 1, 60)); // NOI18N
-        lblRole3.setForeground(new java.awt.Color(232, 54, 39));
-        lblRole3.setText("2");
+        lblUniversityRank.setBackground(new java.awt.Color(254, 254, 254));
+        lblUniversityRank.setFont(new java.awt.Font("Ubuntu", 1, 60)); // NOI18N
+        lblUniversityRank.setForeground(new java.awt.Color(232, 54, 39));
+        lblUniversityRank.setText("2");
 
         lblRole4.setBackground(new java.awt.Color(254, 254, 254));
         lblRole4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -289,7 +291,7 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRole3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUniversityRank, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -300,7 +302,7 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRole3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUniversityRank, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblRole4)
                 .addGap(24, 24, 24))
@@ -329,17 +331,17 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(103, 130, 167));
         jLabel3.setText("Faculty Ranking:");
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(211, 64, 71));
-        jLabel4.setText("98.0%");
+        txtDeptFacultyRating.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        txtDeptFacultyRating.setForeground(new java.awt.Color(211, 64, 71));
+        txtDeptFacultyRating.setText("98.0%");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(103, 130, 167));
         jLabel5.setText("Employment Ranking(Placement):");
 
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(211, 64, 71));
-        jLabel6.setText("98.0%");
+        txtDeptEmploymentRating.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        txtDeptEmploymentRating.setForeground(new java.awt.Color(211, 64, 71));
+        txtDeptEmploymentRating.setText("98.0%");
 
         lblSubtitle.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         lblSubtitle.setForeground(new java.awt.Color(227, 51, 24));
@@ -352,56 +354,54 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(txtDeptCourseRating))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 16, Short.MAX_VALUE)
-                                .addComponent(lblRole1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(116, 116, 116)))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 31, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSubtitle))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtDeptEmploymentRating))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel3))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtDeptFacultyRating)
+                                        .addComponent(txtDeptCourseRating))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblRole1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cmbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(154, 154, 154))
+                                .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSubtitle)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSubtitle)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSubtitle)
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRole1))
@@ -412,13 +412,12 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(txtDeptFacultyRating))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                            .addComponent(txtDeptEmploymentRating))))
+                .addGap(33, 33, 33)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -431,8 +430,16 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
         populateEmployerTable();
         populateFacultyTable();
         Formatter dobleFormatter = new Formatter();
+        Formatter facultyRatingFormatter = new Formatter();
+        Formatter employmentRatingFormatter = new Formatter();
         dobleFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptCoursesRating());
         txtDeptCourseRating.setText(String.valueOf(dobleFormatter) + "%");
+        
+        facultyRatingFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptFacultyRating());
+        txtDeptFacultyRating.setText(String.valueOf(facultyRatingFormatter) + "/5");
+        
+        employmentRatingFormatter.format("%.2f", ((Department) cmbDepartment.getSelectedItem()).calculateDeptEmploymentRating());
+        txtDeptEmploymentRating.setText(String.valueOf(employmentRatingFormatter) + "%");
     }//GEN-LAST:event_cmbDepartmentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -486,9 +493,7 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<Object> cmbDepartment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -496,15 +501,17 @@ public class StudentAlumniJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblRole1;
-    private javax.swing.JLabel lblRole3;
     private javax.swing.JLabel lblRole4;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUniversityRank;
     private javax.swing.JTable tblAlumni;
     private javax.swing.JTable tblCourse;
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTable tblFaculty;
     private javax.swing.JLabel txtDeptCourseRating;
+    private javax.swing.JLabel txtDeptEmploymentRating;
+    private javax.swing.JLabel txtDeptFacultyRating;
     // End of variables declaration//GEN-END:variables
 
     private void populateCourseTable() {
