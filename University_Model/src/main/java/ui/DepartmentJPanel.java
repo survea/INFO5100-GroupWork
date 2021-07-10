@@ -6,6 +6,8 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Formatter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -240,13 +242,13 @@ public class DepartmentJPanel extends javax.swing.JPanel {
 
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Employer Name", "Courses", "Salary Offered"
+                "Employer Name", "Courses"
             }
         ));
         jScrollPane4.setViewportView(tblEmployee);
@@ -308,13 +310,13 @@ public class DepartmentJPanel extends javax.swing.JPanel {
 
         tblFaculty.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Faculty Name", "Course", "Postition", "Rating"
+                "Faculty Name", "Course", "Rating"
             }
         ));
         jScrollPane5.setViewportView(tblFaculty);
@@ -643,6 +645,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
         try {
             DefaultTableModel model = (DefaultTableModel) tblAlumni.getModel();
             model.setRowCount(0);
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             for (Alumni alumni : ((Department) cmbDepartment.getSelectedItem()).getAlumniDirectory().getAlumniDir()) {
                 StringBuffer sb = new StringBuffer();
 
@@ -651,13 +654,14 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                     sb.append(", ");
                 }
                 String courseNameString = sb.toString();
-                Object row[] = new Object[6];
+                Object row[] = new Object[7];
                 row[0] = alumni;
                 row[1] = courseNameString;
                 row[2] = String.valueOf(alumni.getGpa());
                 row[3] = alumni.getEmployer();
                 row[4] = String.valueOf(alumni.getSalary());
                 row[5] = String.valueOf(alumni.getEmploymentRatingPercent());
+                row[6] = dateFormat.format(alumni.getGraduationYear());
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -677,7 +681,7 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                     sb.append(", ");
                 }
                 String courseContentString = sb.toString();
-                Object row[] = new Object[4];
+                Object row[] = new Object[2];
                 row[0] = employer.getName();
                 row[1] = courseContentString;
 //                row[2] = courseContentString;
@@ -703,11 +707,11 @@ public class DepartmentJPanel extends javax.swing.JPanel {
                 }
                 faculty.calcRating();
                 String courseNameString = sb.toString();
-                Object row[] = new Object[4];
+                Object row[] = new Object[3];
                 row[0] = String.valueOf(faculty.getFirstName() + " " + faculty.getLastName());
                 row[1] = courseNameString;
 //                row[2] = courseContentString;
-                row[3] = String.valueOf(faculty.getRating());
+                row[2] = String.valueOf(faculty.getRating());
                 model.addRow(row);
             }
         } catch (Exception e) {

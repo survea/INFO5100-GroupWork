@@ -6,6 +6,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.util.Map;
 import javax.swing.JPanel;
 import model.university.University;
 import model.university.UniversityDirectory;
@@ -39,8 +40,14 @@ public class LoginScreen extends javax.swing.JPanel {
         lblRole2 = new javax.swing.JLabel();
         cmbUniversity = new javax.swing.JComboBox<>();
         btnLogin = new javax.swing.JButton();
-        lblRole = new javax.swing.JLabel();
         lblRole1 = new javax.swing.JLabel();
+        btnGradesMatter = new javax.swing.JButton();
+        lblLgls = new javax.swing.JLabel();
+        lblLgas = new javax.swing.JLabel();
+        lblLghs = new javax.swing.JLabel();
+        lblHgls = new javax.swing.JLabel();
+        lblHghs = new javax.swing.JLabel();
+        lblHgas = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
 
@@ -102,43 +109,72 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        lblRole.setBackground(new java.awt.Color(254, 254, 254));
-        lblRole.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        lblRole.setForeground(new java.awt.Color(4, 95, 169));
-        lblRole.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRole.setText("Model");
-
         lblRole1.setBackground(new java.awt.Color(254, 254, 254));
         lblRole1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
         lblRole1.setForeground(new java.awt.Color(4, 95, 169));
         lblRole1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRole1.setText("University");
+        lblRole1.setText("University Model");
+
+        btnGradesMatter.setBackground(new java.awt.Color(254, 254, 254));
+        btnGradesMatter.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        btnGradesMatter.setForeground(new java.awt.Color(229, 70, 69));
+        btnGradesMatter.setText("Do grades matter?");
+        btnGradesMatter.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnGradesMatter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGradesMatterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRole1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(307, 307, 307))
+                .addContainerGap(263, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblRole1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(307, 307, 307))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(243, 243, 243))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnGradesMatter, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(422, 422, 422))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(239, 239, 239)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addGap(358, 358, 358)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHgas, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHghs, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLgas, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLghs, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHgls, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLgls, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(lblRole1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGradesMatter, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblLgls, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLgas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLghs, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHgls, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(lblHgas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHghs, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -155,13 +191,30 @@ public class LoginScreen extends javax.swing.JPanel {
               CardLayout layout = (CardLayout) mainWorkArea.getLayout();
              layout.next(mainWorkArea);
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnGradesMatterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGradesMatterActionPerformed
+        // TODO add your handling code here:
+        Map relationStats =  UniversityDirectory.calcAlumniGpaSuccessRelationship();
+        lblLgls.setText(String.valueOf(relationStats.get("lgls"))+ "% of graduates have low GPA had a low salary");
+        lblLgas.setText(String.valueOf(relationStats.get("lgas"))+ "% of graduates have low GPA had a average salary");
+        lblLghs.setText(String.valueOf(relationStats.get("lghs"))+ "% of graduates have low GPA had a high salary");
+        lblHgls.setText(String.valueOf(relationStats.get("hgls"))+ "% of graduates have high GPA had a low salary");
+        lblHgas.setText(String.valueOf(relationStats.get("hgas"))+ "% of graduates have high GPA had a average salary");
+        lblHghs.setText(String.valueOf(relationStats.get("hghs"))+ "% of graduates have high GPA had a high salary");
+    }//GEN-LAST:event_btnGradesMatterActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGradesMatter;
     private javax.swing.JButton btnLogin;
     private javax.swing.JComboBox<Object> cmbUniversity;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblRole;
+    private javax.swing.JLabel lblHgas;
+    private javax.swing.JLabel lblHghs;
+    private javax.swing.JLabel lblHgls;
+    private javax.swing.JLabel lblLgas;
+    private javax.swing.JLabel lblLghs;
+    private javax.swing.JLabel lblLgls;
     private javax.swing.JLabel lblRole1;
     private javax.swing.JLabel lblRole2;
     // End of variables declaration//GEN-END:variables

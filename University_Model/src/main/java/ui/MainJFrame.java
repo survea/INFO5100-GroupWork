@@ -102,7 +102,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-        setSize(1000, 600);
+        setSize(1000, 640);
         setResizable(false);
 
         empDir = new EmployerDirectory();
@@ -336,11 +336,12 @@ public class MainJFrame extends javax.swing.JFrame {
         for (int alumniCount = 0; alumniCount < 50; alumniCount++) {
             //        Student studentDetails = new Student(faker.number().randomDouble(2, 0, 4), faker.number().randomDigitNotZero(), faker.name().firstName(), faker.name().lastName(), faker.number().randomDigitNotZero());
             Alumni alumniDetails = new Alumni(dept);
-            alumniDetails.setGpa(faker.number().randomDouble(2, 3, 4));
+            alumniDetails.setGpa(faker.number().randomDouble(2, 2, 4));
             alumniDetails.setId(faker.number().randomDigitNotZero());
             alumniDetails.setFirstName(faker.name().firstName());
             alumniDetails.setLastName(faker.name().lastName());
             alumniDetails.setAge(faker.number().randomDigitNotZero());
+            alumniDetails.setGraduationYear(faker.date().birthday(1, 5));
 
             for (int i = 0; i < 2; i++) {
                 alumniDetails.addCourse(dept.getCourseList().getCourseList().get(rand.nextInt(dept.getCourseList().getCourseList().size())));

@@ -6,6 +6,7 @@
 package model.person;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.course.Course;
 import model.course.CourseCatalog;
@@ -25,6 +26,7 @@ public class Alumni extends Student {
     private String jobPostion;
     private double employmentRating;
     private double employmentRatingPercent;
+    private Date graduationYear;
 
     public Alumni(Department department) {
         courseCatalog = new CourseCatalog(department);
@@ -106,6 +108,14 @@ public class Alumni extends Student {
 
     public void addEmploymentHistory(EmploymentHistory employmentHistory) {
         this.employmentHistory.add(employmentHistory);
+    }
+
+    public Date getGraduationYear() {
+        return graduationYear;
+    }
+
+    public void setGraduationYear(Date graduationYear) {
+        this.graduationYear = graduationYear;
     }
 
     public double calcEmploymentRating() {
